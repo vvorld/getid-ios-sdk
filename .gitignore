@@ -1,4 +1,3 @@
-*.DS_Store*
 .DS_Store
 
 ## Build generated
@@ -31,9 +30,6 @@ xcuserdata/
 timeline.xctimeline
 playground.xcworkspace
 
-# CocoaPods
-# Pods/
-
 # Carthage
 # Carthage/Checkouts
 
@@ -42,8 +38,5 @@ Carthage/Build
 # fastlane
 fastlane/report.xml
 fastlane/Preview.html
-# fastlane/screenshots/**/*.png
+fastlane/screenshots/**/*.png
 fastlane/test_output
-
-# credentials
-GetID-Demo/GetIDDemoAC.swift
