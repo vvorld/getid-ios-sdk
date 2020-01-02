@@ -305,7 +305,12 @@ style.buttonStyle = buttonStyle;
 ```
 
 ## Handling callbacks
-There are multiple callbacks you can get from `GetIDViewController`. In order to do that one should assign an object that conforms to `GetIDViewControllerDelegate` protocol to `delegate` property of `GetIDViewController`. See description of all the methods of this protocol in the table below.
+There are multiple callbacks you can get from `GetIDViewController`.
+If you want to handle the verification process completion then assign an object that conforms to `GetIDCompletionDelegate` protocol to `delegate` property of `GetIDViewController`. 
+If you want to receive the captured data then assign an object that conforms to `GetIDCapturedDataDelegate` protocol to `capturedDataDelegate` property of `GetIDViewController`. 
+If you want to handle intermediate events then assign an object that conforms to `GetIDIntermediateEventsDelegate` protocol to `intermediateEventsDelegate` property of `GetIDViewController`. 
+See description of all the methods of these protocols in the tables below.
+
 ##### Swift
 ```swift
 GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL") { (viewController, error) in
@@ -313,6 +318,8 @@ GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL"
         return
     }
     getIDViewController.delegate = self
+    getIDViewController.capturedDataDelegate = self
+    getIDViewController.intermediateEventsDelegate = self
     self.present(getIDViewController, animated: true, completion: nil)
 }
 
@@ -321,20 +328,28 @@ GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL"
 ```Objective-C
 [GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_API_KEY" url:@"YOUR_URL" then:^(GetIDViewController *viewController, NSError *error) {
     viewController.delegate = self;
+    viewController.capturedDataDelegate = self;
+    viewController.intermediateEventsDelegate = self;
     [self presentViewController:viewController animated:YES completion:nil];
 }];
 ```
 
-| Method | Description |
+| `GetIDCompletionDelegate` method | Description |
+| ----- | ----- |
+| `getIDDidComplete(_:)` | Tells the delegate that the user has completed the verification process and `GetIDViewController` has been dismissed. |
+| `getIDDidCancel(_:)` | Tells the delegate that the user has interrupted the verification process and `GetIDViewController` has been dismissed. |
+
+| `GetIDCapturedDataDelegate` method | Description |
+| ----- | ----- |
+| `getID(_:didSubmitForm:)` | Tells the delegate that the user has filled out the form and tapped the “Next” button on the form screen. |
+| `getID(_:didCaptureDocument:)` | Tells the delegate that photos of the user's document have been taken. |
+| `getID(_:didTakeSelfie:)` | Tells the delegate that a photo of the user's face was taken. |
+
+| `GetIDIntermediateEventsDelegate` method | Description |
 | ----- | ----- |
 | `getIDDidGetConsent(_:)` | Tells the delegate that the user has consented to the processing of his personal data. |
-| `getID(_:didSubmitForm:)` | Tells the delegate that the user has filled out the form and tapped the “Next” button on the form screen. |
 | `getID(_:didChooseDocumentType:issuingCountry:)` | Tells the delegate that the type of document and country of issue have been chosen. |
-| `getID(_:didCaptureDocument:)` | Tells the delegate that photos of the user's document have been taken. |
-| `getID(_:didTookSelfie:)` | Tells the delegate that a photo of the user's face was taken. |
 | `getIDDidUploadData(_:)` | Tells the delegate that the user data has been uploaded to GetID server. |
-| `getIDDidCancelled(_:)` | Tells the delegate that the user has interrupted the verification process and `GetIDViewController` has been dismissed. |
-| `getID(_:didComplete:)` | Tells the delegate that the user has completed the verification process and `GetIDViewController` has been dismissed. |
 
 Note: some of these callbacks can be called multiple times because a user can press back button, edit the data and go forward again.
 
