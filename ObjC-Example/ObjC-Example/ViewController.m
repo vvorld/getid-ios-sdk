@@ -9,7 +9,7 @@
 #import "ViewController.h"
 @import GetID;
 
-@interface ViewController () <GetIDViewControllerDelegate>
+@interface ViewController () <GetIDCompletionDelegate>
 
 @end
 
@@ -31,15 +31,7 @@
     }];
 }
 
-- (void)getIDDidCancelled:(GetIDViewController * _Nonnull)viewController {}
-- (void)getIDDidCompleteUploadingData:(GetIDViewController * _Nonnull)viewController { }
-- (void)getIDDidGetConsent:(GetIDViewController * _Nonnull)viewController { }
-- (void)getIDDidUploadData:(GetIDViewController * _Nonnull)viewController {}
-- (void)getID:(GetIDViewController * _Nonnull)viewController didCaptureDocument:(NSArray<UIImage *> * _Nonnull)images {}
-- (void)getID:(GetIDViewController * _Nonnull)viewController didChooseDocumentType:(enum DocumentType)documentType issuingCountry:(GIDCountry * _Nonnull)country {}
-- (void)getID:(GetIDViewController * _Nonnull)viewController didComplete:(NSString * _Nonnull)applicationId {}
-- (void)getID:(GetIDViewController * _Nonnull)viewController didSubmitForm:(NSArray<GIDFormField *> * _Nonnull)fields {}
-- (void)getID:(GetIDViewController * _Nonnull)viewController didTakeSelfie:(UIImage * _Nonnull)image {}
-- (void)getID:(GetIDViewController * _Nonnull)viewController didVerifyLiveness:(NSArray<UIImage *> * _Nonnull)images {}
+- (void)getIDDidComplete:(GetIDViewController * _Nonnull)viewController {}
+- (void)getIDDidCancel:(GetIDViewController * _Nonnull)viewController {}
 
 @end
