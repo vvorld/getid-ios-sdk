@@ -52,6 +52,8 @@ it, simply add the following line to your `Podfile`:
 ```ruby
 pod 'GetID'
 ```
+Note: in case of `Unable to find a specification for 'GetID'` error, try `pod repo update` and then `pod install` again.
+
 ### Carthage
 
 GetID SDK is compatible with [Carthage](https://github.com/Carthage/Carthage). Add it to your `Cartfile`:
