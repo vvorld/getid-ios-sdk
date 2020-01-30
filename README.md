@@ -20,6 +20,7 @@
         *   [Setting acceptable documents](#setting-acceptable-documents)
     *   [UI customisation](#ui-customisation)
 *   [Handling callbacks](#handling-callbacks)
+*   [Form prefill](#form-prefill)
 *   [Localisation](#localisation)
 
 ## Overview
@@ -354,6 +355,75 @@ GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL"
 | `getIDDidUploadData(_:)` | Tells the delegate that the user data has been uploaded to GetID server. |
 
 Note: some of these callbacks can be called multiple times because a user can press back button, edit the data and go forward again.
+
+## Form prefill
+
+The SDK provides the ability to prefill the form using a captured photo of a document. 
+For now, it works only for documents that contain MRZ (machine-readable zone) - almost all passports, ID cards and Residence Permit cards.
+To enable this feature, one should set `prifillForm` value of `Configuration` object to `true`. And, obviously, `.document` step should preceed `.form` step.
+
+There are two different technologies that SDK uses for text recognition - Apple's Vision and Tesseract. Vision is the default option. It doesn't increase the size of SDK (because of using a system framework) but works little bit worse than Tesseract. And Vision-based option works only for iOS 13+ users.
+
+##### Swift
+```swift
+// Vision-based text recognition:
+let configuration = Configuration()
+configuration.prefillForm = true
+configuration.flowItems = [.document, .form]
+...
+```
+##### Objective-C
+```Objective-C
+// Vision-based text recognition:
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.prefillForm = YES;
+[configuration setFlowItems:@[GIDFlowItemObject.document, GIDFlowItemObject.form]];
+...
+```
+
+If you want to use Tesseract-based text recognition then you have to add one more line to your `Cartfile` or `Podfile`:  `github "vvorld/getid-ios-ocr"` or `pod 'GetIDOCR'` respectively. Then you should create an instance of `MRZTextRecognizer` and pass it to `GetIDFactory`.
+
+##### Swift
+```swift
+// Tesseract-based text recognition:
+import GetID
+import GetIDOCR
+...
+let configuration = Configuration()
+configuration.prefillForm = true
+configuration.flowItems = [.document, .form]
+...
+GetIDFactory.makeGetIDViewController(
+    withApiKey: "YOUR_API_KEY", 
+    url: "YOUR_URL", 
+    configuration: configuration, 
+    style: .default, 
+    textRecognizer: MRZTextRecognizer()) { (viewController, error) in
+    // ...
+}
+...
+extension MRZTextRecognizer: TextRecognizer {}
+```
+##### Objective-C
+```Objective-C
+// Tesseract-based text recognition:
+@import GetID;
+@import GetIDOCR;
+...
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.prefillForm = YES;
+[configuration setFlowItems:@[GIDFlowItemObject.document, GIDFlowItemObject.form]];
+...
+[GIDFactory 
+    makeGetIDViewControllerWithApiKey:@"YOUR_API_KEY" 
+    url:@"YOUR_URL" 
+    configuration:configuration 
+    style:style 
+    textRecognizer:[MRZTextRecognizer new] 
+    then:^(GetIDViewController *viewController, NSError *error) {
+    // ...
+}];
+```
 
 ## Localisation
 
