@@ -19,6 +19,7 @@
         *   [Form screen setup](#form-screen-setup)
         *   [Setting acceptable documents](#setting-acceptable-documents)
     *   [UI customisation](#ui-customisation)
+*   [Linking user with verification](#linking-user-with-verification)
 *   [Handling callbacks](#handling-callbacks)
 *   [Form prefill](#form-prefill)
 *   [Localisation](#localisation)
@@ -304,6 +305,39 @@ style.buttonStyle = buttonStyle;
 
 [GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_API_KEY" url:@"YOUR_URL" style:style then:^(GetIDViewController *viewController, NSError *error) {
     // ...
+}];
+```
+
+## Linking user with verification
+
+You can pass `customerId` to `GetIDFactory`. This is useful if you want to link the verification with a user in your database.
+
+##### Swift
+```swift
+GetIDFactory.makeGetIDViewController(
+    withApiKey: "YOUR_API_KEY", 
+    url: "YOUR_URL", 
+    configuration: .defaultConfiguration,
+    style: .defaultStyle, 
+    customerId: "CUSTOMER_ID", 
+    textRecognizer: nil) { (viewController, error) in
+    guard let getIDViewController = viewController else {
+        return
+    }
+    self.present(getIDViewController, animated: true, completion: nil)
+}
+```
+##### Objective-C
+```Objective-C
+[GIDFactory 
+    makeGetIDViewControllerWithApiKey:@"YOUR_API_KEY" 
+    url:@"YOUR_URL" 
+    configuration:configuration
+    style:style
+    customerId:@"CUSTOMER_ID"
+    textRecognizer:textRecognizer
+    then:^(GetIDViewController *viewController, NSError *error) {
+    [self presentViewController:viewController animated:YES completion:nil];
 }];
 ```
 
