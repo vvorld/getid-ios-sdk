@@ -26,7 +26,7 @@ final class ViewController: UIViewController {
         
         let apiKey = "YOUR_API_KEY"
         let url = "YOUR_URL"
-        GetIDFactory.makeGetIDViewController(withApiKey: apiKey, url: url, configuration: configuration, style: .default, textRecognizer: MRZTextRecognizer()) { [weak self] (vc, error) in
+        GetIDFactory.makeGetIDViewController(withApiKey: apiKey, url: url, configuration: configuration, style: .default, customerId: nil, textRecognizer: MRZTextRecognizer()) { [weak self] (vc, error) in
             guard let viewController = vc else {
                 print(error ?? "(nil)")
                 return

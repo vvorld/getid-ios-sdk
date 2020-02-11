@@ -33,5 +33,6 @@
 
 - (void)getIDDidComplete:(GetIDViewController * _Nonnull)viewController {}
 - (void)getIDDidCancel:(GetIDViewController * _Nonnull)viewController {}
+- (void)getIDDidFail:(GetIDViewController *)viewController {}
 
 @end
