@@ -21,6 +21,7 @@
     *   [UI customisation](#ui-customisation)
 *   [Linking user with verification](#linking-user-with-verification)
 *   [Handling callbacks](#handling-callbacks)
+*   [Video recording](#video-recording)
 *   [Form prefill](#form-prefill)
 *   [Localisation](#localisation)
 
@@ -382,6 +383,7 @@ GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL"
 | `getID(_:didSubmitForm:)` | Tells the delegate that the user has filled out the form and tapped the “Next” button on the form screen. |
 | `getID(_:didCaptureDocument:)` | Tells the delegate that photos of the user's document have been taken. |
 | `getID(_:didTakeSelfie:)` | Tells the delegate that a photo of the user's face was taken. |
+| `getID(_:didRecordSelfieVideo:)` | Tells the delegate that a video of the user's face was recorded. |
 
 | `GetIDIntermediateEventsDelegate` method | Description |
 | ----- | ----- |
@@ -390,6 +392,33 @@ GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL"
 | `getIDDidUploadData(_:)` | Tells the delegate that the user data has been uploaded to GetID server. |
 
 Note: some of these callbacks can be called multiple times because a user can press back button, edit the data and go forward again.
+
+##  Video recording
+The SDK provides the ability to record a video of selfie taking process. The video can be used to verify liveness of the user. 
+
+Video recording starts when the selfie screen appears and stops when the user takes a selfie. The duration of the video is limited by `selfieVideoDurationLimit` value and if it exceeded then the beginning of the video is being trimmed.
+In order to enable this feature one should set `recordSelfieVideo` property of `Configuration` object to `true`. And, obviously, `flowItems` should contain `.selfie` step.
+
+Note: the valid range of `selfieVideoDurationLimit` value is `1...N` seconds, where `N` is obtained from the backend. If one set a value outside of this range then the value will be set to the nearest bound of the range.
+
+Note: this feature can be not included in your tariff plan. In this case, `recordSelfieVideo` flag has no power.
+
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.recordSelfieVideo = true
+configuration.selfieVideoDurationLimit = 5
+configuration.flowItems = [.selfie, .thanks]
+...
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.recordSelfieVideo = YES;
+configuration.selfieVideoDurationLimit = 5;
+[configuration setFlowItems:@[GIDFlowItemObject.selfie, GIDFlowItemObject.thanks]];
+...
+```
 
 ## Form prefill
 
