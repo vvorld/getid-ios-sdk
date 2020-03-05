@@ -156,7 +156,7 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 
 #### Consent screen setup
 The SDK provides a customisable data-processing consent screen. By default, this screen is not displayed. If you want to display this screen then add `.consent` value to `flowItems` property of `GetID.Configuration` (see [Changing flow content](#changing-flow-content) section).
-You can customise links and some texts on this screen. All the properties of `ConsentConfiguration` are optional. If the value of any property is `nil` then the default value is displayed.
+You can customise links and some texts on this screen. See the properties of `ConsentConfiguration` in the table below.
 
 | Property | Description |
 | ----- | ----- |
