@@ -18,6 +18,7 @@
         *   [Consent screen setup](#consent-screen-setup)
         *   [Form screen setup](#form-screen-setup)
         *   [Setting acceptable documents](#setting-acceptable-documents)
+        *   [Thanks screen setup](#thanks-screen-setup)
     *   [UI customisation](#ui-customisation)
 *   [Linking user with verification](#linking-user-with-verification)
 *   [Handling callbacks](#handling-callbacks)
@@ -301,6 +302,31 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 }];
 ```
 Note: this setting makes sense only if `GetIDViewController.flowItems` contains `.document`.
+
+#### Thanks screen setup
+The SDK provides a customisable "Thank you" screen. If you want to display this screen then add `.thanks` value to `flowItems` property of `GetID.Configuration` (see [Changing flow content](#changing-flow-content) section).
+You can customise texts on this screen. See the properties of `ThanksConfiguration` in the table below.
+
+| Property | Description |
+| ----- | ----- |
+| `title` | The title of the screen. |
+| `detailsText` | The secondary text below the title. |
+| `buttonTitle` | The button title. |
+
+##### Swift
+```swift
+let configuration = Configuration()
+let thanksConfiguration = ThanksConfiguration()
+thanksConfiguration.title = "Congratulations!"
+configuration.thanksConfiguration = thanksConfiguration
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+GIDThanksConfiguration *thanksConfiguration = [GIDThanksConfiguration new];
+thanksConfiguration.title = @"Congratulations!";
+configuration.thanksConfiguration = thanksConfiguration;
+```
 
 ### UI customisation
 You can customize some colors used in the SDK. Create an instance of the `Style` class, change its properties and pass it to the constructor of `GetIDViewController`.
