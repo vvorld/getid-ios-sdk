@@ -248,6 +248,22 @@ GIDTextFieldValidator *validator = [[GIDTextFieldValidator alloc] initWithClosur
 [configuration setFormFields:@[[GIDFormField makeTextFieldWithTitle:@"Number" validator:validator]]];
 ```
 
+You can pass ranges to `.date` fields. Create `DateFieldRange` object, passing `minDate` and `maxDate` (or only one of them) to its initializer or use predefined ranges like `.past` and `.future`. 
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.flowItems = [.form, .thanks]
+configuration.formFields = 
+    [.makeDateField(withTitle: "Date of expiry", range: .future),
+     .makeDateField(withTitle: "Date", range: .init(minDate: minDate, maxDate: maxDate))]
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+[configuration setFlowItems:@[GIDFlowItemObject.consent, GIDFlowItemObject.form]];
+[configuration setFormFields:@[[GIDFormField makeDateFieldWithTitle:@"Date of issue" range:[GIDDateFieldRange past]]]];
+```
+
 Also, if you want the user to consent to the processing of his personal data not on a separate `.consent` screen, but on the `.form` screen, then you need to set `.consentInForm` property of `GetID.Configuration` to `true`.
 ##### Swift
 ```swift
