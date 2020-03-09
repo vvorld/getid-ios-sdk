@@ -228,6 +228,26 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 [configuration setFormFields:@[[GIDFormField makeFirstNameWithValue:@"John"],
                                [GIDFormField makeLastNameWithValue:@"Johnson"]]];
 ```
+
+You can pass validators to `.text` fields. In order to do that, create an instance of `TextFieldValidator` type. Its initializer accepts a validation closure and, optionally, a message that will be shown to the user if the input is invalid.
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.flowItems = [.form, .thanks]
+configuration.formFields = 
+    [.makeTextField(withTitle: "Number", validator: TextFieldValidator { $0.allSatisfy { $0.isNumber } },
+     .makeTextField(withTitle: "City", validator: .init(invalidValueMessage: "Should contain letters only") { $0.allSatisfy { $0.isLetter } })]
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+[configuration setFlowItems:@[GIDFlowItemObject.consent, GIDFlowItemObject.form]];
+GIDTextFieldValidator *validator = [[GIDTextFieldValidator alloc] initWithClosure:^BOOL(NSString * _Nonnull string) {
+    return [string integerValue];
+}];
+[configuration setFormFields:@[[GIDFormField makeTextFieldWithTitle:@"Number" validator:validator]]];
+```
+
 Also, if you want the user to consent to the processing of his personal data not on a separate `.consent` screen, but on the `.form` screen, then you need to set `.consentInForm` property of `GetID.Configuration` to `true`.
 ##### Swift
 ```swift
