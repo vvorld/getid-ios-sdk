@@ -236,7 +236,7 @@ You can pass validators to `.text` fields. In order to do that, create an instan
 let configuration = Configuration()
 configuration.flowItems = [.form, .thanks]
 configuration.formFields = 
-    [.makeTextField(withTitle: "Number", validator: TextFieldValidator { $0.allSatisfy { $0.isNumber } },
+    [.makeTextField(withTitle: "Number", validator: TextFieldValidator { $0.allSatisfy { $0.isNumber } }),
      .makeTextField(withTitle: "City", validator: .init(invalidValueMessage: "Should contain letters only") { $0.allSatisfy { $0.isLetter } })]
 ```
 ##### Objective-C
