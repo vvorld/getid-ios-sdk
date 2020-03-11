@@ -215,13 +215,12 @@ let firstNameField = FormField(title: "First name", valueType: .text, value: "Jo
 ```Objective-C
 GIDFormField *authorityField = [[GIDFormField alloc] initWithTitle:@"Authority" valueType:GIDFieldValueTypeText value:@"John"];
 ```
-There are several shortcuts for your convenience: `.makeFirstName`, `.makeLastName` and others. Titles of the fields created by these shortcuts are automatically localized. You can find all of them in `FormField`'s public header.
+There are several shortcuts for your convenience: `.firstName`, `.lastName` and others. Titles of the fields created by these shortcuts are automatically localized. You can find all of them in `FormField`'s public header.
 ##### Swift
 ```swift
 let configuration = Configuration()
 configuration.flowItems = [.consent, .form]
-configuration.formFields = [.makeFirstName(withValue: "John"),
-                            .makeLastName(withValue: "Johnson")]
+configuration.formFields = [.firstName, .lastName]
 ```
 ##### Objective-C
 ```Objective-C
