@@ -107,6 +107,7 @@ GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL"
 | `GetID.Configuration` | 23 | None of set `.acceptableDocumentTypes` is supported. |
 | `GetID.Configuration` | 24 | None of intersections of set `.acceptableCountries` and `.acceptableDocumentTypes` is supported. |
 | `GetID.Configuration` | 25 | `.thanks` item should be the last one. |
+| `GetID.Configuration` | 26 | `.form` can not be the only flow item if all fields are hidden. |
 
 ## Customisation
 
@@ -264,6 +265,17 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 [configuration setFlowItems:@[GIDFlowItemObject.consent, GIDFlowItemObject.form]];
 [configuration setFormFields:@[[GIDFormField makeDateFieldWithTitle:@"Date of issue" range:[GIDDateFieldRange past]]]];
 ```
+
+If you have some information about the user that you want to verify using GetID, but you do not want to allow the user to edit this info, you can create hidden fields.
+##### Swift
+```swift
+let hiddenField = FormField(title: "Last name", valueType: .text, value: "Johnson", hidden: true)
+```
+##### Objective-C
+```Objective-C
+GIDFormField *hiddenField = [[GIDFormField alloc] initWithTitle:@"Last name" valueType:GIDFieldValueTypeText value:@"Johnson" hidden:YES];
+```
+Note: if all the fields are hidden then `.form` step is skipped.
 
 Also, if you want the user to consent to the processing of his personal data not on a separate `.consent` screen, but on the `.form` screen, then you need to set `.consentInForm` property of `GetID.Configuration` to `true`.
 ##### Swift
