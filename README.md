@@ -230,6 +230,16 @@ GIDConfiguration *configuration = [GIDConfiguration new];
                                [GIDFormField makeLastNameWithValue:@"Johnson"]]];
 ```
 
+Also, you can create fields with a finite set of possible values. In this case, users will choose a value using a picker, instead of typing it. The `valueType` of such fields is `.text`.
+##### Swift
+```swift
+let field = FormField(title: "City", possibleValues: ["Tallinn", "Tartu"])
+```
+##### Objective-C
+```Objective-C
+GIDFormField *field = [[GIDFormField alloc] initWithTitle:@"City" possibleValues:@[@"Tallinn", @"Tartu"]];
+```
+
 You can pass validators to `.text` fields. In order to do that, create an instance of `TextFieldValidator` type. Its initializer accepts a validation closure and, optionally, a message that will be shown to the user if the input is invalid.
 ##### Swift
 ```swift
