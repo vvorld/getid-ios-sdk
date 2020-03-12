@@ -275,6 +275,19 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 [configuration setFormFields:@[[GIDFormField makeDateFieldWithTitle:@"Date of issue" range:[GIDDateFieldRange past]]]];
 ```
 
+Also, you can create optional fields. Users will be able to skip them.
+##### Swift
+```swift
+let fields: [FormField] = 
+    [FormField(title: "City", possibleValues: ["Tallinn", "Tartu"], optional: true),
+     FormField(title: "Address", valueType: .text, value: nil, optional: true),
+     .makeTextField(title: "Number", validator: .init { Int($0) != nil }, optional: true)]
+```
+##### Objective-C
+```Objective-C
+GIDFormField *field = [[GIDFormField alloc] initWithTitle:@"City" possibleValues:@[@"Tallinn", @"Tartu"] optional:YES];
+```
+
 If you have some information about the user that you want to verify using GetID, but you do not want to allow the user to edit this info, you can create hidden fields.
 ##### Swift
 ```swift
