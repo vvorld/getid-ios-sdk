@@ -379,6 +379,9 @@ You can customize some colors used in the SDK. Create an instance of the `Style`
 | `logoImage` | The image shown on the consent screen. |
 | `tickColor` | The color of the tick symbol in checkmark views. |
 | `poweredByStyle` | The style of GetID logo in `Powered by GetID` label. Possible values: `.light`, `.dark`. |
+| `successIconStyle` | The style of the icon used to display a successful result. |
+| `errorIconStyle` | The style of the icon used in error message alerts. |
+| `cautionIconStyle` | The style of the icon used in warnings. |
 
 ##### Swift
 ```swift
