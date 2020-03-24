@@ -206,6 +206,8 @@ Supported value types: `.text`, `.date`,  `.sex` and `.country`. See the value f
 | `.sex` | `String`, `"male"` or `"female"` |
 | `.country` | `String` in `ISO 3166-1 alpha-2` format |
 
+Note: all duplicates (fields with same titles) in `formFields` array are ignored. So, `[.init(title: "City", valueType: .text), .init(title: "City", valueType: .text)]` is the same as `[.init(title: "City", valueType: .text)]`.
+
 Optionally, you can prepopulate some fields by known values. Pass the values according to formats listed in the table above. For example, you know user's first name:
 ##### Swift
 ```swift
