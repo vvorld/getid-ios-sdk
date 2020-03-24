@@ -367,7 +367,7 @@ You can customize some colors used in the SDK. Create an instance of the `Style`
 
 | Property | Description |
 | ----- | ----- |
-| `backgroundColor` | The background color of all screens except the camera screen. |
+| `backgroundColor` | The background color of all the screens. |
 | `tintColor` | The color of graphic elements such as guides on the camera screen and the back button. |
 | `textColor` | The primary text color. |
 | `placeholderColor` | The color of the placeholders on the form screen. |
@@ -378,6 +378,8 @@ You can customize some colors used in the SDK. Create an instance of the `Style`
 | `activityIndicatorStyle` | The style of the activity indicator shown while sending the captured data. Possible values: `.light`, `.dark`. |
 | `logoImage` | The image shown on the consent screen. |
 | `tickColor` | The color of the tick symbol in checkmark views. |
+| `invalidValueColor` | The color of invalid field values highlighting on the form screen. |
+| `cameraScreenBackgroundColor` | The background color of the camera screen. If `nil` then `.backgroundColor` is used. |
 | `poweredByStyle` | The style of GetID logo in `Powered by GetID` label. Possible values: `.light`, `.dark`. |
 | `successIconStyle` | The style of the icon used to display a successful result. |
 | `errorIconStyle` | The style of the icon used in error message alerts. |
