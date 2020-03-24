@@ -20,6 +20,7 @@
         *   [Setting acceptable documents](#setting-acceptable-documents)
         *   [Thanks screen setup](#thanks-screen-setup)
     *   [UI customisation](#ui-customisation)
+    *   [Verification types](#verification-types)
 *   [Linking user with verification](#linking-user-with-verification)
 *   [Handling callbacks](#handling-callbacks)
 *   [Video recording](#video-recording)
@@ -108,6 +109,9 @@ GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL"
 | `GetID.Configuration` | 24 | None of intersections of set `.acceptableCountries` and `.acceptableDocumentTypes` is supported. |
 | `GetID.Configuration` | 25 | `.thanks` item should be the last one. |
 | `GetID.Configuration` | 26 | `.form` can not be the only flow item if all fields are hidden. |
+| `GetID.Configuration` | 27 | `.flowItems` should contain `.selfie` and `.document` if `.verificationTypes` contains `.faceMatching`. |
+| `GetID.Configuration` | 28 | `.flowItems` should contain `.document` if `.verificationTypes` contains `.dataExtraction`. |
+| `GetID.Configuration` | 29 | `.flowItems` should contain `.document` or `.formFields` should contain `.firstName`, `.lastName` and `.dateOfBirth` if `.verificationTypes` contains `.watchlists`. |
 
 ## Customisation
 
@@ -411,6 +415,22 @@ style.buttonStyle = buttonStyle;
     // ...
 }];
 ```
+
+### Verification types
+You may also set desirable types of verification. In order to do that pass a non-empty array of `VerificationTypeObject` objects to `setVerificationTypes(_:)` method of `GetID.Configuration`. The possible values are `.faceMatching`, `.dataExtraction` and `.watchlists`.
+
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.setVerificationTypes([.faceMatching, .watchlists])
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+[configuration setVerificationTypes:@[GIDVerificationType.faceMatching, GIDVerificationType.dataExtraction]];
+```
+
+Note:  if you set `verificationTypes`, then make sure that `.flowItems` contains required steps, otherwise, you'll get an error instead of `GetIDViewController` instance. For example, `.dataExtraction` requires `.document` step in `.flowItems`.
 
 ## Linking user with verification
 
