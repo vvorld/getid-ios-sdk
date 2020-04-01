@@ -80,7 +80,7 @@ import GetID
 Use `GetIDFactory` to create an instance of `GetIDViewController`.
 ##### Swift
 ```swift
-GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL") { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL") { (viewController, error) in
     guard let getIDViewController = viewController else {
         return
     }
@@ -128,10 +128,10 @@ You can customise the SDK flow. Create an instance of the `Configuration` class,
 ##### Swift
 ```swift
 let configuration = Configuration()
-configuration.flowItems = [.form, .selfie, .thanks]
+configuration.setFlowItems([.form, .selfie, .thanks])
 configuration.formFields = [FormField(title: "Birth place", valueType: .country)]
 
-GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL", configuration: configuration) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL", configuration: configuration) { (viewController, error) in
     // ...
 }
 ```
@@ -152,7 +152,7 @@ Note: all duplicates in `flowItems` array are ignored. So, `[.form, .form, .than
 ##### Swift
 ```swift
 let configuration = Configuration()
-configuration.flowItems = [.selfie, .thanks]
+configuration.setFlowItems([.selfie, .thanks])
 ```
 ##### Objective-C
 ```Objective-C
@@ -174,7 +174,7 @@ You can customise links and some texts on this screen. See the properties of `Co
 ##### Swift
 ```swift
 let configuration = Configuration()
-let consentConfiguration = ConsentConfiguration()
+let consentConfiguration = Configuration.ConsentConfiguration()
 consentConfiguration.companyName = "Company"
 configuration.consentConfiguration = consentConfiguration
 ```
@@ -225,7 +225,7 @@ There are several shortcuts for your convenience: `.firstName`, `.lastName` and 
 ##### Swift
 ```swift
 let configuration = Configuration()
-configuration.flowItems = [.consent, .form]
+configuration.setFlowItems([.consent, .form])
 configuration.formFields = [.firstName, .lastName]
 ```
 ##### Objective-C
@@ -250,10 +250,10 @@ You can pass validators to `.text` fields. In order to do that, create an instan
 ##### Swift
 ```swift
 let configuration = Configuration()
-configuration.flowItems = [.form, .thanks]
-configuration.formFields = 
-    [.makeTextField(withTitle: "Number", validator: TextFieldValidator { $0.allSatisfy { $0.isNumber } }),
-     .makeTextField(withTitle: "City", validator: .init(invalidValueMessage: "Should contain letters only") { $0.allSatisfy { $0.isLetter } })]
+configuration.setFlowItems([.form, .thanks])
+configuration.formFields =
+    [.makeTextField(title: "Number", validator: TextFieldValidator { $0.allSatisfy { $0.isNumber } }),
+     .makeTextField(title: "City", validator: .init(invalidValueMessage: "Should contain letters only") { $0.allSatisfy { $0.isLetter } })]
 ```
 ##### Objective-C
 ```Objective-C
@@ -269,10 +269,10 @@ You can pass ranges to `.date` fields. Create `DateFieldRange` object, passing `
 ##### Swift
 ```swift
 let configuration = Configuration()
-configuration.flowItems = [.form, .thanks]
-configuration.formFields = 
-    [.makeDateField(withTitle: "Date of expiry", range: .future),
-     .makeDateField(withTitle: "Date", range: .init(minDate: minDate, maxDate: maxDate))]
+configuration.setFlowItems([.form, .thanks])
+configuration.formFields =
+    [.makeDateField(title: "Date of expiry", range: .future),
+     .makeDateField(title: "Date", range: .init(minDate: minDate, maxDate: maxDate))]
 ```
 ##### Objective-C
 ```Objective-C
@@ -328,7 +328,7 @@ If GetID does not support any specified document types from any specified countr
 let configuration = Configuration()
 configuration.setAcceptableDocumentTypes([.passport])
 configuration.setAcceptableCountryCodes(["ru", "ee"])
-GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL", configuration: configuration) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL", configuration: configuration) { (viewController, error) in
     // ...
 }
 ```
@@ -356,7 +356,7 @@ You can customise texts on this screen. See the properties of `ThanksConfigurati
 ##### Swift
 ```swift
 let configuration = Configuration()
-let thanksConfiguration = ThanksConfiguration()
+let thanksConfiguration = Configuration.ThanksConfiguration()
 thanksConfiguration.title = "Congratulations!"
 configuration.thanksConfiguration = thanksConfiguration
 ```
@@ -395,11 +395,11 @@ You can customize some colors used in the SDK. Create an instance of the `Style`
 ```swift
 let style = Style()
 style.backgroundColor = .lightGray
-let buttonStyle = ButtonStyle()
+let buttonStyle = Style.ButtonStyle()
 buttonStyle.backgroundColor = .purple
 style.buttonStyle = buttonStyle
 
-GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL", style: style) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL", style: style) { (viewController, error) in
     // ...
 }
 ```
@@ -439,7 +439,7 @@ You can pass `customerId` to `GetIDFactory`. This is useful if you want to link 
 ##### Swift
 ```swift
 GetIDFactory.makeGetIDViewController(
-    withApiKey: "YOUR_API_KEY", 
+    apiKey: "YOUR_API_KEY", 
     url: "YOUR_URL", 
     configuration: .defaultConfiguration,
     style: .defaultStyle, 
@@ -474,7 +474,7 @@ See description of all the methods of these protocols in the tables below.
 
 ##### Swift
 ```swift
-GetIDFactory.makeGetIDViewController(withApiKey: "YOUR_API_KEY", url: "YOUR_URL") { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL") { (viewController, error) in
     guard let getIDViewController = viewController else {
         return
     }
@@ -531,7 +531,7 @@ Note: this feature can be not included in your tariff plan. In this case, `recor
 let configuration = Configuration()
 configuration.recordSelfieVideo = true
 configuration.selfieVideoDurationLimit = 5
-configuration.flowItems = [.selfie, .thanks]
+configuration.setFlowItems([.selfie, .thanks])
 ...
 ```
 ##### Objective-C
@@ -556,7 +556,7 @@ There are two different technologies that SDK uses for text recognition - Apple'
 // Vision-based text recognition:
 let configuration = Configuration()
 configuration.prefillForm = true
-configuration.flowItems = [.document, .form]
+configuration.setFlowItems([.document, .form])
 ...
 ```
 ##### Objective-C
@@ -578,10 +578,10 @@ import GetIDOCR
 ...
 let configuration = Configuration()
 configuration.prefillForm = true
-configuration.flowItems = [.document, .form]
+configuration.setFlowItems([.document, .form])
 ...
 GetIDFactory.makeGetIDViewController(
-    withApiKey: "YOUR_API_KEY", 
+    apiKey: "YOUR_API_KEY", 
     url: "YOUR_URL", 
     configuration: configuration, 
     style: .default, 
