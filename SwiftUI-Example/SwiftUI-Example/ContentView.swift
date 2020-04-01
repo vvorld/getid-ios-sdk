@@ -21,7 +21,7 @@ struct ContentView: View {
             let apiKey = "YOUR_API_KEY"
             let url = "YOUR_URL"
 
-            GetIDFactory.makeGetIDViewController(withApiKey: apiKey, url: url, configuration: configuration) { (vc, error) in
+            GetIDFactory.makeGetIDViewController(apiKey: apiKey, url: url, configuration: configuration) { (vc, error) in
                 guard let viewController = vc else { return }
                 rootController.present(viewController, animated: true, completion: nil)
             }

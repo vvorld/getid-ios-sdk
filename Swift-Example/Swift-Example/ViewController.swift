@@ -17,13 +17,11 @@ class ViewController: UIViewController {
         
         let configuration = Configuration()
         configuration.setFlowItems([.consent, .form, .document, .selfie, .thanks])
-        configuration.formFields = [.makeFirstName(withValue: ""),
-                                    .makeLastName(withValue: ""),
-                                    .makeDateOfBirth(withValue: "")]
+        configuration.formFields = [.firstName, .lastName, .dateOfBirth]
         
         let apiKey = "YOUR_API_KEY"
         let url = "YOUR_URL"
-        GetIDFactory.makeGetIDViewController(withApiKey: apiKey, url: url, configuration: configuration) { [weak self] (vc, error) in
+        GetIDFactory.makeGetIDViewController(apiKey: apiKey, url: url, configuration: configuration) { [weak self] (vc, error) in
             guard let viewController = vc else {
                 print(error ?? "(nil)")
                 return
