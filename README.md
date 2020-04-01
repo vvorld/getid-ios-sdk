@@ -35,7 +35,7 @@ The SDK does not provide methods for obtaining verification results. Use GetID A
 ## Getting started
 ### Requirements
 - Xcode 10.2+
-- Swift 4.2+
+- Swift 5.0+
 - iOS 11+
 
 ### Obtaining an API key
