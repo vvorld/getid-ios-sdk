@@ -497,7 +497,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL") { 
 
 | `GetIDCompletionDelegate` method | Description |
 | ----- | ----- |
-| `getIDDidComplete(_:)` | Tells the delegate that the user has completed the verification process and `GetIDViewController` has been dismissed. |
+| `getIDDidComplete(_:applicationID:)` | Tells the delegate that the user has completed the verification process and `GetIDViewController` has been dismissed. |
 | `getIDDidCancel(_:)` | Tells the delegate that the user has interrupted the verification process and `GetIDViewController` has been dismissed. |
 | `getIDDidFail(_:)` | Tells the delegate that the verification process has been failed and `GetIDViewController` has been dismissed. This can happen, for example, if the passed `customerId` has already been used. |
 
