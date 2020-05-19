@@ -18,6 +18,7 @@
         *   [Consent screen setup](#consent-screen-setup)
         *   [Form screen setup](#form-screen-setup)
         *   [Setting acceptable documents](#setting-acceptable-documents)
+        *   [Video screen setup](#video-screen-setup)
         *   [Thanks screen setup](#thanks-screen-setup)
     *   [UI customisation](#ui-customisation)
     *   [Verification types](#verification-types)
@@ -42,7 +43,7 @@ The SDK does not provide methods for obtaining verification results. Use GetID A
 In order to start using GetID SDK, you will need an API key. Use a `sandbox` key to test the integration. Use a `live` key in the production. You can get both keys inside your GetID Admin Panel.
 
 ### Camera usage description
-The SDK uses the camera for capturing photos during verification. The app is responsible for describing the reason for using the camera. You must add `NSCameraUsageDescription` to the info.plist of the app.
+The SDK uses the camera for capturing photos during verification. The app is responsible for describing the reason for using the camera. You must add `NSCameraUsageDescription` to the Info.plist of the app.
 
 ### Using in Objective-C apps
 If you app is written entirely in Objective-C, you should set `Always Embed Swift Standard Libraries` to `YES` in your app target's build settings.
@@ -112,6 +113,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL") { 
 | `GetID.Configuration` | 27 | `.flowItems` should contain `.selfie` and `.document` if `.verificationTypes` contains `.faceMatching`. |
 | `GetID.Configuration` | 28 | `.flowItems` should contain `.document` if `.verificationTypes` contains `.dataExtraction`. |
 | `GetID.Configuration` | 29 | `.flowItems` should contain `.document` or `.formFields` should contain `.firstName`, `.lastName` and `.dateOfBirth` if `.verificationTypes` contains `.watchlists`. |
+| `GetID.Configuration` | 30 | `recordSelfieVideo` should be `false` if `.flowItems` contains `.video`. |
 
 ## Customisation
 
@@ -146,7 +148,7 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 ```
 
 #### Changing flow content
-You can specify which screens should be displayed in the verification flow and the order of them. In order to do that assign a non-empty array of `FlowItemObject` objects to `flowItems` property of `GetID.Configuration`. The possible values are `.consent`, `.form`, `.document`, `.selfie` and `.thanks`.
+You can specify which screens should be displayed in the verification flow and the order of them. In order to do that assign a non-empty array of `FlowItemObject` objects to `flowItems` property of `GetID.Configuration`. The possible values are `.consent`, `.form`, `.document`, `.selfie`, `.video` and `.thanks`.
 
 Note: all duplicates in `flowItems` array are ignored. So, `[.form, .form, .thanks]` is the same as `[.form, .thanks]`.
 ##### Swift
@@ -343,6 +345,32 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 ```
 Note: this setting makes sense only if `GetIDViewController.flowItems` contains `.document`.
 
+#### Video screen setup
+The SDK provides a customisable screen for recording a video with a user saying a phrase.
+By default, this screen is not displayed. If you want to display this screen then add `.video` value to `flowItems` property of `GetID.Configuration` (see [Changing flow content](#changing-flow-content) section). 
+Also, you have to provide the instructions to the user (a phrase he/she should say). And you can set the limit of the video length.
+Finally, you must add `NSMicrophoneUsageDescription` to the Info.plist of the app.
+
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.setFlowItems([.document, .selfie, .video, .thanks])
+let videoConfiguration = Configuration.VideoFlowItemConfiguration()
+videoConfiguration.instructions = "Hello, my name is ..."
+videoConfiguration.durationLimit = 20
+configuration.videoFlowItemConfiguration = videoConfiguration
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+[configuration setFlowItems:@[GIDFlowItemObject.document, GIDFlowItemObject.selfie, GIDFlowItemObject.video]];
+GIDThanksConfiguration *videoConfiguration = [GIDVideoFlowItemConfiguration new];
+videoConfiguration.instructions = @"Hello, my name is ...";
+configuration.videoFlowItemConfiguration = videoConfiguration;
+```
+
+Note: this feature can be not included in your tariff plan. In this case, `.video` in `.flowItems` is ignored.
+
 #### Thanks screen setup
 The SDK provides a customisable "Thank you" screen. If you want to display this screen then add `.thanks` value to `flowItems` property of `GetID.Configuration` (see [Changing flow content](#changing-flow-content) section).
 You can customise texts on this screen. See the properties of `ThanksConfiguration` in the table below.
@@ -518,6 +546,10 @@ Note: some of these callbacks can be called multiple times because a user can pr
 
 ##  Video recording
 The SDK provides the ability to record a video of selfie taking process. The video can be used to verify liveness of the user. 
+
+Please do not confuse video recording while taking a selfie with a separate `.video` step.
+These two features are mutually excluded, you can not enable them both simultaneously.
+The description of `.video` step see in [this section](#video-screen-setup).
 
 Video recording starts when the selfie screen appears and stops when the user takes a selfie. The duration of the video is limited by `selfieVideoDurationLimit` value and if it exceeded then the beginning of the video is being trimmed.
 In order to enable this feature one should set `recordSelfieVideo` property of `Configuration` object to `true`. And, obviously, `flowItems` should contain `.selfie` step.
