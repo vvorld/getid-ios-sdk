@@ -25,6 +25,7 @@
 *   [Linking user with verification](#linking-user-with-verification)
 *   [Handling callbacks](#handling-callbacks)
 *   [Video recording](#video-recording)
+*   [NFC reading](#nfc-reading)
 *   [Form prefill](#form-prefill)
 *   [Localisation](#localisation)
 
@@ -574,6 +575,25 @@ configuration.selfieVideoDurationLimit = 5;
 [configuration setFlowItems:@[GIDFlowItemObject.selfie, GIDFlowItemObject.thanks]];
 ...
 ```
+
+## NFC reading
+The SDK is able to read documents using NFC. This feature requires iOS 13+ and works on devices that support NFC reading. 
+To enable this feature, one should set `useNFC` value of `Configuration` object to `true`. And, obviously, `flowItems` should contain `.document` step.
+
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.useNFC = true
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.useNFC = YES;
+```
+
+Note: access to a document's chip requires a key from its MRZ (machine-readable zone). To increase the chances of successful recognition of the key, one can use `GetIDOCR` framework (see [this section](#form-prefill) for more info).
+
+Note: the SDK displays user a screen for NFC reading only if our server expects that the selected type of a document contains RFID chip. If the SDK does not display this screen for documents you sure contain a chip, please contact us through [support@getid.ee](mailto:support@getid.ee).
 
 ## Form prefill
 
