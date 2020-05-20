@@ -104,6 +104,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL") { 
 | `GetID.Auth` | 10 | Invalid URL. |
 | `GetID.Auth` | 11 | You should get an AuthToken to use the SDK. |
 | `GetID.Auth` | 12 | Invalid token. |
+| `GetID.Auth` | 13 | SDK version is not supported. Please, update GetID SDK (or try to use another GetID server). |
 | `GetID.Configuration` | 20 | `.flowItems` should not be empty. |
 | `GetID.Configuration` | 21 | `.formFields` should not be empty if `.flowItems` contains `.form`. |
 | `GetID.Configuration` | 22 | None of set `.acceptableCountries` is supported. |
