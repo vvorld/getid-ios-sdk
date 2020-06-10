@@ -41,7 +41,7 @@ The SDK does not provide methods for obtaining verification results. Use GetID A
 - iOS 11+
 
 ### Obtaining an API key
-In order to start using GetID SDK, you will need an API key. Use a `sandbox` key to test the integration. Use a `live` key in the production. You can get both keys inside your GetID Admin Panel.
+In order to start using GetID SDK, you need an API key and API url. In your GetID Dashboard, you can get and set `API key` and `SDK key`. `API key` grants you access to public API calls and SDK API calls. `SDK key` grants you access to SDK API calls only. For security reasons, strongly recommended using the `SDK key` in your SDK.
 
 ### Camera usage description
 The SDK uses the camera for capturing photos during verification. The app is responsible for describing the reason for using the camera. You must add `NSCameraUsageDescription` to the Info.plist of the app.
