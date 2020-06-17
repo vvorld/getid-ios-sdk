@@ -227,6 +227,23 @@ configuration.multiScreenForm = @[[[GIDFormScreen alloc] initWithTitle:@"Screen 
                                   [[GIDFormScreen alloc] initWithTitle:@"Screen 2" fields:@[GIDFormField.email]]];
 ```
 
+And you can ask users to attach some files to the form:
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.multiScreenForm = [FormScreen(title: "Personal data", 
+                                            fields: [.firstName, .lastName], 
+                                            fileAttachments: [FileAttachment(title: "Proof of address")])]
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.multiScreenForm = @[[[GIDFormScreen alloc] 
+                                    initWithTitle:@"Personal data" 
+                                    fields:@[GIDFormField.firstName] 
+                                    fileAttachments:@[[[GIDFileAttachment alloc] initWithTitle:@"Proof of address"]]]];
+```
+
 To create a `FormField` object one should pass the field title and its value type to the constructor:
 ##### Swift
 ```swift
