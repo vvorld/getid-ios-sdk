@@ -126,8 +126,13 @@ You can customise the SDK flow. Create an instance of the `Configuration` class,
 | ----- | ----- | ----- |
 | `flowItems` | Specifies the screens to be displayed and their order. See [paragraph](#changing-flow-content) below. | `[.document, .selfie, .thanks]` |
 | `formFields` | Specifies the fields to be displayed on the form screen. See [paragraph](#form-screen-setup) below. | `[]` |
+| `consentInForm` | A flag that determines whether to display the data-processing consent checkbox on the form screen. | `false` |
+| `prefillForm` | A flag that determines whether to prefill form with values extracted from the document. See [paragraph](#form-prefill) below. | `false` |
+| `useNFC` | A flag that determines whether to use NFC for data extraction from the document. See [paragraph](#nfc-reading) below. | `false` |
+| `allowDocumentPhotosFromGallery` | A flag that determines whether to use the photo gallery as a document images' source. | `false` |
 | `acceptableCountries` | Specifies a list of countries whose documents are accepted for verification. `[]` means that documents are accepted from all countries supported by GetID. See [paragraph](#setting-acceptable-documents) below. | `[]` |
 | `acceptableDocumentTypes` | Specifies a list of document types accepted for verification. `[]` means that all types of documents supported by GetID are accepted. See [paragraph](#setting-acceptable-documents) below. | `[]` |
+| `recordSelfieVideo` | A flag that determines whether to record video while the user is taking selfie. See [paragraph](#video-recording) below. | `false` |
 
 ##### Swift
 ```swift
