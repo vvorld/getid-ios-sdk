@@ -126,6 +126,7 @@ You can customise the SDK flow. Create an instance of the `Configuration` class,
 | ----- | ----- | ----- |
 | `flowItems` | Specifies the screens to be displayed and their order. See [paragraph](#changing-flow-content) below. | `[.document, .selfie, .thanks]` |
 | `formFields` | Specifies the fields to be displayed on the form screen. See [paragraph](#form-screen-setup) below. | `[]` |
+| `multiScreenForm` | Allows to create a multi-screen form step. If non-empty then `formFields` property is ignored. See [paragraph](#form-screen-setup) below. | `[]` |
 | `consentInForm` | A flag that determines whether to display the data-processing consent checkbox on the form screen. | `false` |
 | `prefillForm` | A flag that determines whether to prefill form with values extracted from the document. See [paragraph](#form-prefill) below. | `false` |
 | `useNFC` | A flag that determines whether to use NFC for data extraction from the document. See [paragraph](#nfc-reading) below. | `false` |
@@ -138,7 +139,7 @@ You can customise the SDK flow. Create an instance of the `Configuration` class,
 ```swift
 let configuration = Configuration()
 configuration.setFlowItems([.form, .selfie, .thanks])
-configuration.formFields = [FormField(title: "Birth place", valueType: .country)]
+configuration.setFormFields([FormField(title: "Birth place", valueType: .country)])
 
 GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL", configuration: configuration) { (viewController, error) in
     // ...
@@ -198,6 +199,33 @@ configuration.consentConfiguration = consentConfiguration;
 #### Form screen setup
 The SDK provides a customisable form screen. By default, this screen is not displayed. If you want to display this screen then add `.form` value to `flowItems` property of `GetID.Configuration` (see [Changing flow content](#changing-flow-content) section).
 Also, you have to assign a non-empty array of `FormField` objects to `formFields` property of `GetID.Configuration`.
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.setFlowItems([.form])
+configuration.setFormFields([.firstName, .lastName])
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+[configuration setFlowItems:@[GIDFlowItemObject.form]];
+[configuration setFormFields:@[[GIDFormField makeFirstNameWithValue:@"John"],
+                               [GIDFormField makeLastNameWithValue:@"Johnson"]]];
+```
+
+Alternatively, you can create a multi-screen form.
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.multiScreenForm = [FormScreen(title: "Screen 1", fields: [.firstName, .lastName]), 
+                                 FormScreen(title: "Screen 2", fields: [.email])]
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.multiScreenForm = @[[[GIDFormScreen alloc] initWithTitle:@"Screen 1" fields:@[GIDFormField.firstName]], 
+                                  [[GIDFormScreen alloc] initWithTitle:@"Screen 2" fields:@[GIDFormField.email]]];
+```
 
 To create a `FormField` object one should pass the field title and its value type to the constructor:
 ##### Swift
@@ -235,7 +263,7 @@ There are several shortcuts for your convenience: `.firstName`, `.lastName` and 
 ```swift
 let configuration = Configuration()
 configuration.setFlowItems([.consent, .form])
-configuration.formFields = [.firstName, .lastName]
+configuration.setFormFields([.firstName, .lastName])
 ```
 ##### Objective-C
 ```Objective-C
@@ -260,9 +288,9 @@ You can pass validators to `.text` fields. In order to do that, create an instan
 ```swift
 let configuration = Configuration()
 configuration.setFlowItems([.form, .thanks])
-configuration.formFields =
+configuration.setFormFields(
     [.makeTextField(title: "Number", validator: TextFieldValidator { $0.allSatisfy { $0.isNumber } }),
-     .makeTextField(title: "City", validator: .init(invalidValueMessage: "Should contain letters only") { $0.allSatisfy { $0.isLetter } })]
+     .makeTextField(title: "City", validator: .init(invalidValueMessage: "Should contain letters only") { $0.allSatisfy { $0.isLetter } })])
 ```
 ##### Objective-C
 ```Objective-C
@@ -279,9 +307,9 @@ You can pass ranges to `.date` fields. Create `DateFieldRange` object, passing `
 ```swift
 let configuration = Configuration()
 configuration.setFlowItems([.form, .thanks])
-configuration.formFields =
+configuration.setFormFields(
     [.makeDateField(title: "Date of expiry", range: .future),
-     .makeDateField(title: "Date", range: .init(minDate: minDate, maxDate: maxDate))]
+     .makeDateField(title: "Date", range: .init(minDate: minDate, maxDate: maxDate))])
 ```
 ##### Objective-C
 ```Objective-C
