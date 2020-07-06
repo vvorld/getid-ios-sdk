@@ -16,6 +16,7 @@
     *   [Flow customisation](#flow-customisation)
         *   [Changing flow content](#changing-flow-content)
         *   [Consent screen setup](#consent-screen-setup)
+        *   [Animated guides](#animated-guides)
         *   [Form screen setup](#form-screen-setup)
         *   [Setting acceptable documents](#setting-acceptable-documents)
         *   [Video screen setup](#video-screen-setup)
@@ -193,6 +194,22 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 GIDConsentConfiguration *consentConfiguration = [GIDConsentConfiguration new];
 consentConfiguration.companyName = @"Company";
 configuration.consentConfiguration = consentConfiguration;
+```
+
+#### Animated guides
+The SDK can display animated guides that explain how to photograph a document and to take a selfie so that verification is more likely to succeed. The guides for `document` and `selfie` steps can be enabled separately.
+
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.displayGuideAtDocumentStep = true
+configuration.displayGuideAtSelfieStep = true
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.displayGuideAtDocumentStep = YES;
+configuration.displayGuideAtSelfieStep = YES;
 ```
 
 #### Form screen setup
