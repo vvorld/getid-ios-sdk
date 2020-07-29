@@ -738,3 +738,23 @@ GetID iOS SDK contains translations for the following locales:
  - Russian
 
 If you need translations for some other locales we don't provide yet, please contact us through [support@getid.ee](mailto:support@getid.ee).
+
+Also, you can override all the strings in the SDK, providing your own translations for any amount of locales. 
+
+To do so, at first you need to get the list of all keys used in `.strings` files in the SDK. 
+Run the following command in Terminal to convert a `.strings` file to a human-readable format:
+```bash
+plutil -convert xml1 /path/to/sdk/GetID.framework/en.lproj/Consent.strings -o /path/to/output/Consent.strings
+```
+
+Once you have the list of keys you want to localize, you can provide values for them in your `Localizable.strings` files, adding `GetID.TableName.` prefix to the keys:
+```
+// in Localizable.strings
+"GetID.Consent.iAgree" = "...";
+```
+
+Or, you can create `.strings` files with the same names as in GetID SDK, just with `GetID` prefix:
+```
+// in GetID.Consent.strings
+"iAgree" = "...";
+```
