@@ -17,6 +17,7 @@
         *   [Changing flow content](#changing-flow-content)
         *   [Consent screen setup](#consent-screen-setup)
         *   [Animated guides](#animated-guides)
+        *   [Interactive document step](#interactive-document-step)
         *   [Form screen setup](#form-screen-setup)
         *   [Setting acceptable documents](#setting-acceptable-documents)
         *   [Video screen setup](#video-screen-setup)
@@ -129,6 +130,7 @@ You can customise the SDK flow. Create an instance of the `Configuration` class,
 | `multiScreenForm` | Allows to create a multi-screen form step. If non-empty then `formFields` property is ignored. See [paragraph](#form-screen-setup) below. | `[]` |
 | `consentInForm` | A flag that determines whether to display the data-processing consent checkbox on the form screen. | `false` |
 | `prefillForm` | A flag that determines whether to prefill form with values extracted from the document. See [paragraph](#form-prefill) below. | `false` |
+| `interactiveDocumentStep` | A flag that determines whether the `.document` step should be "interactive". See [paragraph](#interactive-document-step) below. | `false` |
 | `useNFC` | A flag that determines whether to use NFC for data extraction from the document. See [paragraph](#nfc-reading) below. | `false` |
 | `allowDocumentPhotosFromGallery` | A flag that determines whether to use the photo gallery as a document images' source. | `false` |
 | `acceptableCountries` | Specifies a list of countries whose documents are accepted for verification. `[]` means that documents are accepted from all countries supported by GetID. See [paragraph](#setting-acceptable-documents) below. | `[]` |
@@ -211,6 +213,26 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 configuration.displayGuideAtDocumentStep = YES;
 configuration.displayGuideAtSelfieStep = YES;
 ```
+
+#### Interactive document step
+You can make `.document` step "interactive". In this case, the screen where the user picks the document type and the issuing country won't be displayed. Instead, the SDK will ask the user to provide a photo of a document. Then the photo will be validated and if we need another side's photo then the SDK will ask the user to take a photo of the other side. And the SDK won't allow the user to pass further if the photo does not contain a document or the quality of the photo is poor. In such cases, the user has to retake the photo.
+
+In short, `.interactiveDocumentStep` increases the quality of the photos of documents that are sent to the verification. We recommend enabling this flag.
+
+Also, if this feature is enabled, the [form prefill](#form-prefill) feature works for all the supported documents (not only for documents with MRZ).
+
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.interactiveDocumentStep = true
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.interactiveDocumentStep = YES;
+```
+
+Note: `.acceptableCountries` and `.acceptableDocumentTypes` settings are ignored if `.interactiveDocumentStep` is enabled.
 
 #### Form screen setup
 The SDK provides a customisable form screen. By default, this screen is not displayed. If you want to display this screen then add `.form` value to `flowItems` property of `GetID.Configuration` (see [Changing flow content](#changing-flow-content) section).
@@ -665,10 +687,13 @@ Note: the SDK displays user a screen for NFC reading only if our server expects 
 ## Form prefill
 
 The SDK provides the ability to prefill the form using a captured photo of a document. 
-For now, it works only for documents that contain MRZ (machine-readable zone) - almost all passports, ID cards and Residence Permit cards.
+If you enable `.interactiveDocumentStep`, then this feature works for all the supported documents.
+Otherwise, it works only for documents that contain MRZ (machine-readable zone) - almost all passports, ID cards and Residence Permit cards.
 To enable this feature, one should set `prifillForm` value of `Configuration` object to `true`. And, obviously, `.document` step should preceed `.form` step.
 
 There are two different technologies that SDK uses for text recognition - Apple's Vision and Tesseract. Vision is the default option. It doesn't increase the size of SDK (because of using a system framework) but works little bit worse than Tesseract. And Vision-based option works only for iOS 13+ users.
+
+Note: if `.interactiveDocumentStep` is enabled then the OCR performed at the back-end, so you don't need to import `GetIDOCR`. 
 
 ##### Swift
 ```swift
