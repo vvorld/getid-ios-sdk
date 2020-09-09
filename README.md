@@ -109,9 +109,9 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL") { 
 | `GetID.Auth` | 14 | Invalid key provided. |
 | `GetID.Configuration` | 20 | `.flowItems` should not be empty. |
 | `GetID.Configuration` | 21 | `.formFields` should not be empty if `.flowItems` contains `.form`. |
-| `GetID.Configuration` | 22 | None of set `.acceptableCountries` is supported. |
-| `GetID.Configuration` | 23 | None of set `.acceptableDocumentTypes` is supported. |
-| `GetID.Configuration` | 24 | None of intersections of set `.acceptableCountries` and `.acceptableDocumentTypes` is supported. |
+| `GetID.Configuration` | 22 | None of set `.acceptableDocuments` countries is supported. |
+| `GetID.Configuration` | 23 | None of set `.acceptableDocuments` document types is supported. |
+| `GetID.Configuration` | 24 | None of set `.acceptableDocuments` countries and document types is supported. |
 | `GetID.Configuration` | 25 | `.thanks` item should be the last one. |
 | `GetID.Configuration` | 26 | `.form` can not be the only flow item if all fields are hidden. |
 | `GetID.Configuration` | 27 | `.flowItems` should contain `.selfie` and `.document` if `.verificationTypes` contains `.faceMatching`. |
@@ -134,8 +134,7 @@ You can customise the SDK flow. Create an instance of the `Configuration` class,
 | `interactiveDocumentStep` | A flag that determines whether the `.document` step should be "interactive". See [paragraph](#interactive-document-step) below. | `false` |
 | `useNFC` | A flag that determines whether to use NFC for data extraction from the document. See [paragraph](#nfc-reading) below. | `false` |
 | `allowDocumentPhotosFromGallery` | A flag that determines whether to use the photo gallery as a document images' source. | `false` |
-| `acceptableCountries` | Specifies a list of countries whose documents are accepted for verification. `[]` means that documents are accepted from all countries supported by GetID. See [paragraph](#setting-acceptable-documents) below. | `[]` |
-| `acceptableDocumentTypes` | Specifies a list of document types accepted for verification. `[]` means that all types of documents supported by GetID are accepted. See [paragraph](#setting-acceptable-documents) below. | `[]` |
+| `acceptableDocuments` | Specifies a list of document types accepted for verification. See [paragraph](#setting-acceptable-documents) below. | `[.defaultCountryKey: DocumentType.allCases]` |
 | `recordSelfieVideo` | A flag that determines whether to record video while the user is taking selfie. See [paragraph](#video-recording) below. | `false` |
 
 ##### Swift
@@ -411,16 +410,13 @@ configuration.consentInForm = YES;
 ```
 
 #### Setting acceptable documents
-You can limit the list of acceptable documents and issuing countries. In order to set acceptable document types one should create an instance of `Configuration` class, call `setAcceptableDocumentTypes(_:)` method of this instance passing there an array of `DocumentTypeObject` objects and then pass this configuration to `GetIDViewController` constructor. Supported document types are `.passport`, `.idCard`, `.drivingLicence`, `.residencePermit` and `.internalPassport`.
-
-Countries are configurable in the same way, you have to call `setAcceptableCountryCodes(_:)` method and pass an array of ISO 3166-1 alpha-2 codes to it.
+You can limit the list of acceptable documents and issuing countries. In order to do that one should create an instance of `Configuration` class, call `setAcceptableDocuments(_:)` method of this instance and then pass this configuration to `GetIDViewController` constructor. The method accepts a single parameter - a dictionary where keys are ISO 3166-1 alpha-2 codes and values are arrays of document types. Supported document types are `.passport`, `.idCard`, `.drivingLicence` and `.residencePermit`. Also, there is `default` key which allows to set acceptable documents for countries not listed in the dictionary.
 
 If GetID does not support any specified document types from any specified countries then `GetIDViewController` initializer will throw an error.
 ##### Swift
 ```swift
 let configuration = Configuration()
-configuration.setAcceptableDocumentTypes([.passport])
-configuration.setAcceptableCountryCodes(["ru", "ee"])
+configuration.setAcceptableDocuments(["ee": [.idCard, .passport], "default": [.passport]])
 GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL", configuration: configuration) { (viewController, error) in
     // ...
 }
@@ -428,8 +424,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_API_KEY", url: "YOUR_URL", co
 ##### Objective-C
 ```Objective-C
 GIDConfiguration *configuration = [GIDConfiguration new];
-[configuration setAcceptableDocumentTypes:@[GIDDocumentType.passport]];
-[configuration setAcceptableCountryCodes:@[@"ru", @"en"]];
+[configuration setAcceptableDocumentTypes:@[@"ee": @[GIDDocumentType.passport]]];
 [GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_API_KEY" url:@"YOUR_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
     // ...
 }];
