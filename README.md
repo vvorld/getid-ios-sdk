@@ -30,6 +30,7 @@
 *   [NFC reading](#nfc-reading)
 *   [Form prefill](#form-prefill)
 *   [Localisation](#localisation)
+*   [Troubleshooting](#troubleshooting)
 
 ## Overview
 The SDK provides a set of screens to allow capturing of identity documents and face photos. In addition, the SDK provides a possibility to add a customisable screen for users to enter text information about themselves. Finally, it uploads the captured data to GetID server.
@@ -782,4 +783,15 @@ Or, you can create `.strings` files with the same names as in GetID SDK, just wi
 ```
 // in GetID.Consent.strings
 "iAgree" = "...";
+```
+
+## Troubleshooting
+
+#### iOS 14 simulators issue
+There is a known issue on iOS 14 simulators: `/usr/lib/libnfshared.dylib: mach-o, but not built for platform iOS-sim`. Apple forgot to add `libnfshared.dylib` for whatever reason in the final version of Xcode 12 for iOS 14 simulators. A working workaround until Apple fixes this is to copy the missing lib from Xcode 12 beta 6 over (download the beta from Apple's developer download section).
+Hopefully, the issue will be fixed in Xcode 12.2.
+
+For now, you may execute the following command to download and place it inside the Xcode package:
+```bash
+sudo curl https://storage.googleapis.com/mobile-simulator-build/libnfshared.dylib -o /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libnfshared.dylib
 ```
