@@ -26,7 +26,6 @@
     *   [Verification types](#verification-types)
 *   [Linking user with verification](#linking-user-with-verification)
 *   [Handling callbacks](#handling-callbacks)
-*   [Video recording](#video-recording)
 *   [NFC reading](#nfc-reading)
 *   [Form prefill](#form-prefill)
 *   [Localisation](#localisation)
@@ -117,7 +116,6 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL") { 
 | `GetID.Configuration` | 27 | `.flowItems` should contain `.selfie` and `.document` if `.verificationTypes` contains `.faceMatching`. |
 | `GetID.Configuration` | 28 | `.flowItems` should contain `.document` if `.verificationTypes` contains `.dataExtraction`. |
 | `GetID.Configuration` | 29 | `.flowItems` should contain `.document` or `.formFields` should contain `.firstName`, `.lastName` and `.dateOfBirth` if `.verificationTypes` contains `.watchlists`. |
-| `GetID.Configuration` | 30 | `recordSelfieVideo` should be `false` if `.flowItems` contains `.video`. |
 
 ## Customisation
 
@@ -135,7 +133,6 @@ You can customise the SDK flow. Create an instance of the `Configuration` class,
 | `useNFC` | A flag that determines whether to use NFC for data extraction from the document. See [paragraph](#nfc-reading) below. | `false` |
 | `allowDocumentPhotosFromGallery` | A flag that determines whether to use the photo gallery as a document images' source. | `false` |
 | `acceptableDocuments` | Specifies a list of document types accepted for verification. See [paragraph](#setting-acceptable-documents) below. | `[.defaultCountryKey: DocumentType.allCases]` |
-| `recordSelfieVideo` | A flag that determines whether to record video while the user is taking selfie. See [paragraph](#video-recording) below. | `false` |
 
 ##### Swift
 ```swift
@@ -629,37 +626,6 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL") { 
 | `getIDDidUploadData(_:)` | Tells the delegate that the user data has been uploaded to GetID server. |
 
 Note: some of these callbacks can be called multiple times because a user can press back button, edit the data and go forward again.
-
-##  Video recording
-The SDK provides the ability to record a video of selfie taking process. The video can be used to verify liveness of the user. 
-
-Please do not confuse video recording while taking a selfie with a separate `.video` step.
-These two features are mutually excluded, you can not enable them both simultaneously.
-The description of `.video` step see in [this section](#video-screen-setup).
-
-Video recording starts when the selfie screen appears and stops when the user takes a selfie. The duration of the video is limited by `selfieVideoDurationLimit` value and if it exceeded then the beginning of the video is being trimmed.
-In order to enable this feature one should set `recordSelfieVideo` property of `Configuration` object to `true`. And, obviously, `flowItems` should contain `.selfie` step.
-
-Note: the valid range of `selfieVideoDurationLimit` value is `1...N` seconds, where `N` is obtained from the backend. If one set a value outside of this range then the value will be set to the nearest bound of the range.
-
-Note: this feature can be not included in your tariff plan. In this case, `recordSelfieVideo` flag has no power.
-
-##### Swift
-```swift
-let configuration = Configuration()
-configuration.recordSelfieVideo = true
-configuration.selfieVideoDurationLimit = 5
-configuration.setFlowItems([.selfie, .thanks])
-...
-```
-##### Objective-C
-```Objective-C
-GIDConfiguration *configuration = [GIDConfiguration new];
-configuration.recordSelfieVideo = YES;
-configuration.selfieVideoDurationLimit = 5;
-[configuration setFlowItems:@[GIDFlowItemObject.selfie, GIDFlowItemObject.thanks]];
-...
-```
 
 ## NFC reading
 The SDK is able to read documents using NFC. This feature requires iOS 13+ and works on devices that support NFC reading. 
