@@ -20,7 +20,7 @@
     
     self.view.backgroundColor = [UIColor lightGrayColor];
 
-    NSString *apiKey = @"YOUR_API_KEY";
+    NSString *apiKey = @"YOUR_SDK_KEY";
     NSString *url = @"YOUR_URL";
     [GIDFactory makeGetIDViewControllerWithApiKey:apiKey url:url then:^(GetIDViewController *viewController, NSError *error) {
         if (viewController == nil) {
@@ -31,7 +31,7 @@
     }];
 }
 
-- (void)getIDDidComplete:(GetIDViewController * _Nonnull)viewController {}
+- (void)getIDDidComplete:(GetIDViewController * _Nonnull)viewController applicationID:(NSString * _Nonnull)applicationID {}
 - (void)getIDDidCancel:(GetIDViewController * _Nonnull)viewController {}
 - (void)getIDDidFail:(GetIDViewController *)viewController {}
 

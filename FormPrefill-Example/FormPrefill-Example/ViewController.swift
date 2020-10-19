@@ -18,10 +18,10 @@ final class ViewController: UIViewController {
         
         let configuration = Configuration()
         configuration.setFlowItems([.consent, .document, .form, .selfie, .thanks])
-        configuration.formFields = [.firstName, .lastName, .sex, .dateOfBirth]
+        configuration.setFormFields([.firstName, .lastName, .sex, .dateOfBirth])
         configuration.prefillForm = true
         
-        let apiKey = "YOUR_API_KEY"
+        let apiKey = "YOUR_SDK_KEY"
         let url = "YOUR_URL"
         GetIDFactory.makeGetIDViewController(apiKey: apiKey, url: url, configuration: configuration, style: .defaultStyle, customerId: nil, textRecognizer: MRZTextRecognizer()) { [weak self] (vc, error) in
             guard let viewController = vc else {
