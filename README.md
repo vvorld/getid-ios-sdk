@@ -670,15 +670,27 @@ configuration.selfieVideoDurationLimit = 5;
 The SDK is able to read documents using NFC. This feature requires iOS 13+ and works on devices that support NFC reading. 
 To enable this feature, one should set `useNFC` value of `Configuration` object to `true`. And, obviously, `flowItems` should contain `.document` step.
 
+Also, you have to add one more line to your `Cartfile` or `Podfile`:  `github "vvorld/getid-ios-nfc"` or `pod 'GetIDNFC'` respectively. Then you should create an instance of `GetIDNFCDocumentReader` and pass it to `GetIDFactory`.
+
 ##### Swift
 ```swift
+import GetID
+import GetIDNFC
+...
 let configuration = Configuration()
 configuration.useNFC = true
-```
-##### Objective-C
-```Objective-C
-GIDConfiguration *configuration = [GIDConfiguration new];
-configuration.useNFC = YES;
+configuration.setFlowItems([.document, .form, .selfie])
+...
+GetIDFactory.makeGetIDViewController(
+    apiKey: "YOUR_SDK_KEY",
+    url: "YOUR_URL",
+    configuration: configuration,
+    style: .default,
+    nfcReader: GetIDNFCDocumentReader()) { (viewController, error) in
+    // ...
+}
+...
+extension GetIDNFCDocumentReader: NFCReader {}
 ```
 
 Note: access to a document's chip requires a key from its MRZ (machine-readable zone). To increase the chances of successful recognition of the key, one can use `GetIDOCR` framework (see [this section](#form-prefill) for more info).
