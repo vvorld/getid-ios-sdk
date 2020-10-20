@@ -163,7 +163,7 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 ```
 
 #### Changing flow content
-You can specify which screens should be displayed in the verification flow and the order of them. In order to do that assign a non-empty array of `FlowItemObject` objects to `flowItems` property of `GetID.Configuration`. The possible values are `.consent`, `.form`, `.document`, `.selfie`, `.video` and `.thanks`.
+You can specify which screens should be displayed in the verification flow and the order of them. In order to do that assign a non-empty array of `FlowItemObject` objects to `flowItems` property of `GetID.Configuration`. The possible values are `.consent`, `.form`, `.document`, `.selfie`, `.liveness`, `.video` and `.thanks`.
 
 Note: all duplicates in `flowItems` array are ignored. So, `[.form, .form, .thanks]` is the same as `[.form, .thanks]`.
 ##### Swift
