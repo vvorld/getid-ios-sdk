@@ -117,6 +117,14 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL") { 
 | `GetID.Configuration` | 28 | `.flowItems` should contain `.document` if `.verificationTypes` contains `.dataExtraction`. |
 | `GetID.Configuration` | 29 | `.flowItems` should contain `.document` or `.formFields` should contain `.firstName`, `.lastName` and `.dateOfBirth` if `.verificationTypes` contains `.watchlists`. |
 
+Also, an unrecoverable error can occur during the flow. You'll be informed about it in `getIDDidFail(_:error:)` method of `GetIDCompletionDelegate`.
+
+| Domain | Code | Description |
+| ----- | ----- | ----- |
+| `GetID.Flow` | 50 | Invalid token. Probably, the session is expired. |
+| `GetID.Flow` | 51 | An application with this customerId already exists. |
+| `GetID.Flow` | 52 | This version of SDK is not supported by the liveness server. |
+
 ## Customisation
 
 ### Flow customisation
@@ -610,7 +618,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL") { 
 | ----- | ----- |
 | `getIDDidComplete(_:applicationID:)` | Tells the delegate that the user has completed the verification process and `GetIDViewController` has been dismissed. |
 | `getIDDidCancel(_:)` | Tells the delegate that the user has interrupted the verification process and `GetIDViewController` has been dismissed. |
-| `getIDDidFail(_:)` | Tells the delegate that the verification process has been failed and `GetIDViewController` has been dismissed. This can happen, for example, if the passed `customerId` has already been used. |
+| `getIDDidFail(_:error:)` | Tells the delegate that the verification process has been failed and `GetIDViewController` has been dismissed. This can happen, for example, if the passed `customerId` has already been used. |
 
 | `GetIDCapturedDataDelegate` method | Description |
 | ----- | ----- |
