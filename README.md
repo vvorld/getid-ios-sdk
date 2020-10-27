@@ -24,7 +24,6 @@
         *   [Thanks screen setup](#thanks-screen-setup)
     *   [UI customisation](#ui-customisation)
     *   [Verification types](#verification-types)
-*   [Linking user with verification](#linking-user-with-verification)
 *   [Handling callbacks](#handling-callbacks)
 *   [NFC reading](#nfc-reading)
 *   [Form prefill](#form-prefill)
@@ -86,9 +85,17 @@ import GetID
 ```
 
 Use `GetIDFactory` to create an instance of `GetIDViewController`.
+
+For security reasons, you will need to generate a short-lived JSON Web Token (JWT) every time you initialise the SDK. To generate JWT make a POST request with `SDK KEY` in the header on your designated `API URL`:
+```bash
+$ curl -H "Content-Type: application/json" -H "apikey: SDK_KEY" -X POST API_URL/sdk/v1/token
+```
+
+This request should be performed by your backend. Then your app should retrieve the token from your backend. Do not store `SDK KEY` in your app!
+
 ##### Swift
 ```swift
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL") { (viewController, error) in
+GetIDFactory.makeGetIDViewController(token: "JWT", url: "API_URL") { (viewController, error) in
     guard let getIDViewController = viewController else {
         return
     }
@@ -97,9 +104,15 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL") { (
 ```
 ##### Objective-C
 ```Objective-C
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithToken:@"JWT" url:@"API_URL" then:^(GetIDViewController *viewController, NSError *error) {
     [self presentViewController:viewController animated:YES completion:nil];
 }];
+```
+
+In case you don't want your clients to complete verification more than once or for any other identification purposes
+you can pass `customerId` parameter when generating the token.
+```bash
+$ curl -d '{"customerId":"ID"}' -H "Content-Type: application/json" -H "apikey: SDK_KEY" -X POST API_URL/sdk/v1/token
 ```
 
 ### Possible errors
@@ -152,7 +165,7 @@ let configuration = Configuration()
 configuration.setFlowItems([.form, .selfie, .thanks])
 configuration.setFormFields([FormField(title: "Birth place", valueType: .country)])
 
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL", configuration: configuration) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(token: "JWT", url: "API_URL", configuration: configuration) { (viewController, error) in
     // ...
 }
 ```
@@ -161,7 +174,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL", con
 GIDConfiguration *configuration = [GIDConfiguration new];
 [configuration setFlowItems:@[GIDFlowItemObject.consent, GIDFlowItemObject.document]];
 
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithToken:@"JWT" url:@"API_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
     // ...
 }];
 ```
@@ -426,7 +439,7 @@ If GetID does not support any specified document types from any specified countr
 ```swift
 let configuration = Configuration()
 configuration.setAcceptableDocuments(["ee": [.idCard, .passport], "default": [.passport]])
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL", configuration: configuration) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(token: "JWT", url: "API_URL", configuration: configuration) { (viewController, error) in
     // ...
 }
 ```
@@ -434,7 +447,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL", con
 ```Objective-C
 GIDConfiguration *configuration = [GIDConfiguration new];
 [configuration setAcceptableDocumentTypes:@[@"ee": @[GIDDocumentType.passport]]];
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithToken:@"JWT" url:@"API_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
     // ...
 }];
 ```
@@ -522,7 +535,7 @@ let buttonStyle = Style.ButtonStyle()
 buttonStyle.backgroundColor = .purple
 style.buttonStyle = buttonStyle
 
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL", style: style) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(token: "JWT", url: "API_URL", style: style) { (viewController, error) in
     // ...
 }
 ```
@@ -534,7 +547,7 @@ GIDButtonStyle *buttonStyle = [GIDButtonStyle new];
 buttonStyle.textColor = [UIColor blackColor];
 style.buttonStyle = buttonStyle;
 
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" style:style then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithToken:@"JWT" url:@"API_URL" style:style then:^(GetIDViewController *viewController, NSError *error) {
     // ...
 }];
 ```
@@ -555,39 +568,6 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 
 Note:  if you set `verificationTypes`, then make sure that `.flowItems` contains required steps, otherwise, you'll get an error instead of `GetIDViewController` instance. For example, `.dataExtraction` requires `.document` step in `.flowItems`.
 
-## Linking user with verification
-
-You can pass `customerId` to `GetIDFactory`. This is useful if you want to link the verification with a user in your database.
-
-##### Swift
-```swift
-GetIDFactory.makeGetIDViewController(
-    apiKey: "YOUR_SDK_KEY",
-    url: "API_URL",
-    configuration: .defaultConfiguration,
-    style: .defaultStyle, 
-    customerId: "CUSTOMER_ID", 
-    textRecognizer: nil) { (viewController, error) in
-    guard let getIDViewController = viewController else {
-        return
-    }
-    self.present(getIDViewController, animated: true, completion: nil)
-}
-```
-##### Objective-C
-```Objective-C
-[GIDFactory 
-    makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY"
-    url:@"API_URL"
-    configuration:configuration
-    style:style
-    customerId:@"CUSTOMER_ID"
-    textRecognizer:textRecognizer
-    then:^(GetIDViewController *viewController, NSError *error) {
-    [self presentViewController:viewController animated:YES completion:nil];
-}];
-```
-
 ## Handling callbacks
 There are multiple callbacks you can get from `GetIDViewController`.
 If you want to handle the verification process completion then assign an object that conforms to `GetIDCompletionDelegate` protocol to `delegate` property of `GetIDViewController`. 
@@ -597,7 +577,7 @@ See description of all the methods of these protocols in the tables below.
 
 ##### Swift
 ```swift
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL") { (viewController, error) in
+GetIDFactory.makeGetIDViewController(token: "JWT", url: "API_URL") { (viewController, error) in
     guard let getIDViewController = viewController else {
         return
     }
@@ -610,7 +590,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL") { (
 ```
 ##### Objective-C
 ```Objective-C
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithToken:@"JWT" url:@"API_URL" then:^(GetIDViewController *viewController, NSError *error) {
     viewController.delegate = self;
     viewController.capturedDataDelegate = self;
     viewController.intermediateEventsDelegate = self;
@@ -655,7 +635,7 @@ configuration.useNFC = true
 configuration.setFlowItems([.document, .form, .selfie])
 ...
 GetIDFactory.makeGetIDViewController(
-    apiKey: "YOUR_SDK_KEY",
+    token: "JWT",
     url: "API_URL",
     configuration: configuration,
     style: .default,
@@ -711,7 +691,7 @@ configuration.prefillForm = true
 configuration.setFlowItems([.document, .form])
 ...
 GetIDFactory.makeGetIDViewController(
-    apiKey: "YOUR_SDK_KEY",
+    token: "JWT",
     url: "API_URL",
     configuration: configuration, 
     style: .default, 
@@ -732,7 +712,7 @@ configuration.prefillForm = YES;
 [configuration setFlowItems:@[GIDFlowItemObject.document, GIDFlowItemObject.form]];
 ...
 [GIDFactory 
-    makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY"
+    makeGetIDViewControllerWithToken:@"JWT"
     url:@"API_URL"
     configuration:configuration 
     style:style 
