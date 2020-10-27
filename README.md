@@ -43,7 +43,11 @@ The SDK does not provide methods for obtaining verification results. Use GetID A
 - iOS 11+
 
 ### Obtaining an API key
-In order to start using GetID SDK, you need an API key and API url. In your GetID Dashboard, you can get and set `API key` and `SDK key`. `API key` grants you access to public API calls and SDK API calls. `SDK key` grants you access to SDK API calls only. For security reasons, strongly recommended using the `SDK key` in your SDK.
+In order to start using GetID SDK, you will need an `SDK KEY` and `API URL`.
+Both can be found and modified either through your GetID Dashboard or via contacting our 
+[integration support](mailto:support@getid.ee?subject=[GitHub]%20Obtaining%20GetID%20credentials).
+
+Note: In your GetID Dashboard, you can get and set `API KEY` and `SDK KEY`. `API KEY` grants you access to public API calls and SDK API calls. `SDK KEY` grants you access to SDK API calls only. For security reasons, strongly recommended using the `SDK KEY` in your SDK.
 
 ### Camera usage description
 The SDK uses the camera for capturing photos during verification. The app is responsible for describing the reason for using the camera. You must add `NSCameraUsageDescription` to the Info.plist of the app.
@@ -84,7 +88,7 @@ import GetID
 Use `GetIDFactory` to create an instance of `GetIDViewController`.
 ##### Swift
 ```swift
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL") { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL") { (viewController, error) in
     guard let getIDViewController = viewController else {
         return
     }
@@ -93,7 +97,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL") { 
 ```
 ##### Objective-C
 ```Objective-C
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"YOUR_URL" then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" then:^(GetIDViewController *viewController, NSError *error) {
     [self presentViewController:viewController animated:YES completion:nil];
 }];
 ```
@@ -148,7 +152,7 @@ let configuration = Configuration()
 configuration.setFlowItems([.form, .selfie, .thanks])
 configuration.setFormFields([FormField(title: "Birth place", valueType: .country)])
 
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL", configuration: configuration) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL", configuration: configuration) { (viewController, error) in
     // ...
 }
 ```
@@ -157,7 +161,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL", co
 GIDConfiguration *configuration = [GIDConfiguration new];
 [configuration setFlowItems:@[GIDFlowItemObject.consent, GIDFlowItemObject.document]];
 
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"YOUR_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
     // ...
 }];
 ```
@@ -422,7 +426,7 @@ If GetID does not support any specified document types from any specified countr
 ```swift
 let configuration = Configuration()
 configuration.setAcceptableDocuments(["ee": [.idCard, .passport], "default": [.passport]])
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL", configuration: configuration) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL", configuration: configuration) { (viewController, error) in
     // ...
 }
 ```
@@ -430,7 +434,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL", co
 ```Objective-C
 GIDConfiguration *configuration = [GIDConfiguration new];
 [configuration setAcceptableDocumentTypes:@[@"ee": @[GIDDocumentType.passport]]];
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"YOUR_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" configuration:configuration then:^(GetIDViewController *viewController, NSError *error) {
     // ...
 }];
 ```
@@ -518,7 +522,7 @@ let buttonStyle = Style.ButtonStyle()
 buttonStyle.backgroundColor = .purple
 style.buttonStyle = buttonStyle
 
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL", style: style) { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL", style: style) { (viewController, error) in
     // ...
 }
 ```
@@ -530,7 +534,7 @@ GIDButtonStyle *buttonStyle = [GIDButtonStyle new];
 buttonStyle.textColor = [UIColor blackColor];
 style.buttonStyle = buttonStyle;
 
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"YOUR_URL" style:style then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" style:style then:^(GetIDViewController *viewController, NSError *error) {
     // ...
 }];
 ```
@@ -559,7 +563,7 @@ You can pass `customerId` to `GetIDFactory`. This is useful if you want to link 
 ```swift
 GetIDFactory.makeGetIDViewController(
     apiKey: "YOUR_SDK_KEY",
-    url: "YOUR_URL", 
+    url: "API_URL",
     configuration: .defaultConfiguration,
     style: .defaultStyle, 
     customerId: "CUSTOMER_ID", 
@@ -574,7 +578,7 @@ GetIDFactory.makeGetIDViewController(
 ```Objective-C
 [GIDFactory 
     makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY"
-    url:@"YOUR_URL" 
+    url:@"API_URL"
     configuration:configuration
     style:style
     customerId:@"CUSTOMER_ID"
@@ -593,7 +597,7 @@ See description of all the methods of these protocols in the tables below.
 
 ##### Swift
 ```swift
-GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL") { (viewController, error) in
+GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "API_URL") { (viewController, error) in
     guard let getIDViewController = viewController else {
         return
     }
@@ -606,7 +610,7 @@ GetIDFactory.makeGetIDViewController(apiKey: "YOUR_SDK_KEY", url: "YOUR_URL") { 
 ```
 ##### Objective-C
 ```Objective-C
-[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"YOUR_URL" then:^(GetIDViewController *viewController, NSError *error) {
+[GIDFactory makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY" url:@"API_URL" then:^(GetIDViewController *viewController, NSError *error) {
     viewController.delegate = self;
     viewController.capturedDataDelegate = self;
     viewController.intermediateEventsDelegate = self;
@@ -652,7 +656,7 @@ configuration.setFlowItems([.document, .form, .selfie])
 ...
 GetIDFactory.makeGetIDViewController(
     apiKey: "YOUR_SDK_KEY",
-    url: "YOUR_URL",
+    url: "API_URL",
     configuration: configuration,
     style: .default,
     nfcReader: GetIDNFCDocumentReader()) { (viewController, error) in
@@ -708,7 +712,7 @@ configuration.setFlowItems([.document, .form])
 ...
 GetIDFactory.makeGetIDViewController(
     apiKey: "YOUR_SDK_KEY",
-    url: "YOUR_URL", 
+    url: "API_URL",
     configuration: configuration, 
     style: .default, 
     textRecognizer: MRZTextRecognizer()) { (viewController, error) in
@@ -729,7 +733,7 @@ configuration.prefillForm = YES;
 ...
 [GIDFactory 
     makeGetIDViewControllerWithApiKey:@"YOUR_SDK_KEY"
-    url:@"YOUR_URL" 
+    url:@"API_URL"
     configuration:configuration 
     style:style 
     textRecognizer:[MRZTextRecognizer new] 
