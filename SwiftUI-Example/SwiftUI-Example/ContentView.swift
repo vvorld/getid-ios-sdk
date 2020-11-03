@@ -18,8 +18,8 @@ struct ContentView: View {
             let configuration = Configuration()
             configuration.setFlowItems([.consent, .document, .selfie, .thanks])
 
-            let apiKey = "YOUR_SDK_KEY"
-            let url = "YOUR_URL"
+            let apiKey = "SDK_KEY"
+            let url = "API_URL"
 
             GetIDFactory.makeGetIDViewController(apiKey: apiKey, url: url, configuration: configuration) { (vc, error) in
                 guard let viewController = vc else { return }

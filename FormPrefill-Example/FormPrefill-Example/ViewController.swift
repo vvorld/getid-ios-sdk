@@ -21,9 +21,9 @@ final class ViewController: UIViewController {
         configuration.setFormFields([.firstName, .lastName, .sex, .dateOfBirth])
         configuration.prefillForm = true
         
-        let apiKey = "YOUR_SDK_KEY"
-        let url = "YOUR_URL"
-        GetIDFactory.makeGetIDViewController(apiKey: apiKey, url: url, configuration: configuration, style: .defaultStyle, customerId: nil, textRecognizer: MRZTextRecognizer()) { [weak self] (vc, error) in
+        let apiKey = "SDK_KEY"
+        let url = "API_URL"
+        GetIDFactory.makeGetIDViewController(apiKey: apiKey, url: url, configuration: configuration, style: .defaultStyle, customerId: nil, textRecognizer: MRZTextRecognizer(), nfcReader: nil) { [weak self] (vc, error) in
             guard let viewController = vc else {
                 print(error ?? "(nil)")
                 return

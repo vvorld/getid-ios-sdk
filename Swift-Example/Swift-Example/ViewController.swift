@@ -19,8 +19,8 @@ class ViewController: UIViewController {
         configuration.setFlowItems([.consent, .form, .document, .selfie, .thanks])
         configuration.setFormFields([.firstName, .lastName, .dateOfBirth])
         
-        let apiKey = "YOUR_SDK_KEY"
-        let url = "YOUR_URL"
+        let apiKey = "SDK_KEY"
+        let url = "API_URL"
         GetIDFactory.makeGetIDViewController(apiKey: apiKey, url: url, configuration: configuration) { [weak self] (vc, error) in
             guard let viewController = vc else {
                 print(error ?? "(nil)")
