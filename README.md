@@ -10,6 +10,7 @@
 *   [Installation](#installation)
     *   [Cocoapods](#cocoapods)
     *   [Carthage](#carthage)
+    *   [Swift Package Manager](#swift-package-manager)
 *   [Usage](#usage)
     *   [Possible errors](#possible-errors)
 *   [Customisation](#customisation)
@@ -73,6 +74,11 @@ GetID SDK is compatible with [Carthage](https://github.com/Carthage/Carthage). A
 ```ogdl
 github "vvorld/getid-ios-sdk"
 ```
+
+### Swift Package Manager
+
+In Xcode (11.2+), select File > Swift Packages > Add Package Dependency.
+Follow the prompts using the URL for this repository and a minimum semantic version of `1.8.0`.
 
 ## Usage
 ##### Swift
