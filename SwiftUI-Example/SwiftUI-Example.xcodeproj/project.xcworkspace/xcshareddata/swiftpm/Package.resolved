@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "GetID",
+        "repositoryURL": "https://github.com/vvorld/getid-ios-sdk",
+        "state": {
+          "branch": null,
+          "revision": "6538dc9a3135c1db0551e6be4589dd850464ae5d",
+          "version": "1.8.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74F395A125668FD30029220D /* GetID in Frameworks */ = {isa = PBXBuildFile; productRef = 74F395A025668FD30029220D /* GetID */; };
 		875823D023F6B6EC000A91BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875823CF23F6B6EC000A91BB /* AppDelegate.swift */; };
 		875823D223F6B6EC000A91BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875823D123F6B6EC000A91BB /* SceneDelegate.swift */; };
 		875823D423F6B6EC000A91BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875823D323F6B6EC000A91BB /* ContentView.swift */; };
 		875823D623F6B6F2000A91BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 875823D523F6B6F2000A91BB /* Assets.xcassets */; };
 		875823DC23F6B6F2000A91BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 875823DA23F6B6F2000A91BB /* LaunchScreen.storyboard */; };
-		875823E623F6BF0B000A91BB /* GetID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 875823E523F6BF0B000A91BB /* GetID.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				875823E623F6BF0B000A91BB /* GetID.framework in Frameworks */,
+				74F395A125668FD30029220D /* GetID in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,13 +86,15 @@
 				875823C823F6B6EC000A91BB /* Sources */,
 				875823C923F6B6EC000A91BB /* Frameworks */,
 				875823CA23F6B6EC000A91BB /* Resources */,
-				875823E323F6BEBB000A91BB /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "SwiftUI-Example";
+			packageProductDependencies = (
+				74F395A025668FD30029220D /* GetID */,
+			);
 			productName = "SwiftUI-Example";
 			productReference = 875823CC23F6B6EC000A91BB /* SwiftUI-Example.app */;
 			productType = "com.apple.product-type.application";
@@ -104,7 +106,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = GetID;
 				TargetAttributes = {
 					875823CB23F6B6EC000A91BB = {
@@ -121,6 +123,9 @@
 				Base,
 			);
 			mainGroup = 875823C323F6B6EB000A91BB;
+			packageReferences = (
+				74F3959F25668FD30029220D /* XCRemoteSwiftPackageReference "getid-ios-sdk" */,
+			);
 			productRefGroup = 875823CD23F6B6EC000A91BB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,28 +146,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		875823E323F6BEBB000A91BB /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/GetID.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/GetID.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		875823C823F6B6EC000A91BB /* Sources */ = {
@@ -215,6 +198,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -275,6 +259,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -311,10 +296,6 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X7XGD8K7A6;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "SwiftUI-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -335,10 +316,6 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X7XGD8K7A6;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "SwiftUI-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -373,6 +350,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		74F3959F25668FD30029220D /* XCRemoteSwiftPackageReference "getid-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vvorld/getid-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		74F395A025668FD30029220D /* GetID */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 74F3959F25668FD30029220D /* XCRemoteSwiftPackageReference "getid-ios-sdk" */;
+			productName = GetID;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 875823C423F6B6EB000A91BB /* Project object */;
 }
