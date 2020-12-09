@@ -730,31 +730,46 @@ configuration.prefillForm = YES;
 
 ## Localisation
 
-GetID iOS SDK contains translations for the following locales:
- - English
- - Russian
+GetID iOS SDK loads translations from the server at launch. The SDK also gets the user's preferred languages list from the operating system. Then the SDK compares this list with available translations and picks the best match.
 
-If you need translations for some other locales we don't provide yet, please contact us through [support@getid.ee](mailto:support@getid.ee).
+It works automatically and doesn't require any additional configuration.
 
-Also, you can override all the strings in the SDK, providing your own translations for any amount of locales. 
+But if you want to override the list of preferred languages received from the operating system, you can pass one or more locales to `preferredLocales` property of a `Configuration` object.
 
-To do so, at first you need to get the list of all keys used in `.strings` files in the SDK. 
-Run the following command in Terminal to convert a `.strings` file to a human-readable format:
-```bash
-plutil -convert xml1 /path/to/sdk/GetID.framework/en.lproj/Consent.strings -o /path/to/output/Consent.strings
+##### Swift
+```swift
+let configuration = Configuration()
+configuration.preferredLocales = ["et"]
+```
+##### Objective-C
+```Objective-C
+GIDConfiguration *configuration = [GIDConfiguration new];
+configuration.preferredLocales = @[@"et"];
 ```
 
-Once you have the list of keys you want to localize, you can provide values for them in your `Localizable.strings` files, adding `GetID.TableName.` prefix to the keys:
-```
-// in Localizable.strings
-"GetID.Consent.iAgree" = "...";
-```
+Note: if you don't want SDK to load translations from the server but instead, you want to override translation locally using `.strings` files then set `configuration.loadTranslationsFromTheServer = false`.
+But we don't recommend to do so.
 
-Or, you can create `.strings` files with the same names as in GetID SDK, just with `GetID` prefix:
-```
-// in GetID.Consent.strings
-"iAgree" = "...";
-```
+The list of supported languages:
+- English (`en`)
+- German (`de`)
+- French (`fr`)
+- Spanish (`es_ES`)
+- Russian (`ru`)
+- Polish (`pl`)
+- Dutch (`nl`)
+- Greek (`el`)
+- Romanian (`ro`)
+- Hungarian (`hu`)
+- Slovenian (`sl`)
+- Estonian (`et`)
+
+Coming soon:
+- Portuguese (`pt_PT`)
+- Brazilian Portuguese (`pt_BR`)
+- Mexican Spanish (`es_MX`)
+- Italian (`it`)
+- Albanian (`sq`)
 
 ## Troubleshooting
 
