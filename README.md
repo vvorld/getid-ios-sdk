@@ -755,6 +755,9 @@ The list of supported languages:
 - French (`fr`)
 - Spanish (`es_ES`)
 - Russian (`ru`)
+- Portuguese (`pt_PT`)
+- Brazilian Portuguese (`pt_BR`)
+- Italian (`it`)
 - Polish (`pl`)
 - Dutch (`nl`)
 - Greek (`el`)
@@ -762,10 +765,4 @@ The list of supported languages:
 - Hungarian (`hu`)
 - Slovenian (`sl`)
 - Estonian (`et`)
-
-Coming soon:
-- Portuguese (`pt_PT`)
-- Brazilian Portuguese (`pt_BR`)
-- Mexican Spanish (`es_MX`)
-- Italian (`it`)
 - Albanian (`sq`)
