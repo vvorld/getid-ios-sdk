@@ -23,7 +23,6 @@
 		875823D523F6B6F2000A91BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		875823DB23F6B6F2000A91BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		875823DD23F6B6F2000A91BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		875823E523F6BF0B000A91BB /* GetID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetID.framework; path = Carthage/Build/iOS/GetID.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +70,6 @@
 		875823E423F6BF0B000A91BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				875823E523F6BF0B000A91BB /* GetID.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
