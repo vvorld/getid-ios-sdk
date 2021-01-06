@@ -764,5 +764,7 @@ The list of supported languages:
 - Romanian (`ro`)
 - Hungarian (`hu`)
 - Slovenian (`sl`)
-- Estonian (`et`)
 - Albanian (`sq`)
+- Estonian (`et`)
+- Lithuanian (`lt`)
+- Latvian (`lv`)
