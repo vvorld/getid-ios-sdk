@@ -25,6 +25,7 @@
         *   [Thanks screen setup](#thanks-screen-setup)
     *   [UI customisation](#ui-customisation)
     *   [Verification types](#verification-types)
+    *   [Metadata](#metadata)
 *   [Handling callbacks](#handling-callbacks)
 *   [NFC reading](#nfc-reading)
 *   [Form prefill](#form-prefill)
@@ -572,6 +573,39 @@ GIDConfiguration *configuration = [GIDConfiguration new];
 ```
 
 Note:  if you set `verificationTypes`, then make sure that `.flowItems` contains required steps, otherwise, you'll get an error instead of `GetIDViewController` instance. For example, `.dataExtraction` requires `.document` step in `.flowItems`.
+
+### Metadata
+You can attach some metadata to a verification. In order to do that pass a non-empty `metadata` dictionary to `makeGetIDViewController` method.
+
+##### Swift
+```swift
+GetIDFactory.makeGetIDViewController(
+    token: token,
+    url: "API_URL",
+    configuration: .defaultConfiguration,
+    style: .defaultStyle,
+    metadata: ["dapartment": "EST"],
+    textRecognizer: nil,
+    nfcReader: nil
+) { viewController, error in {
+    ...
+}
+```
+
+##### Objective-C
+```Objective-C
+[GIDFactory
+    makeGetIDViewControllerWithToken:token
+    url:@"API_URL"
+    configuration:[GIDConfiguration defaultConfiguration]
+    style:[GIDStyle defaultStyle]
+    metadata:@{@"department": @"EST"}
+    textRecognizer:nil
+    nfcReader:nil
+    then:^(GetIDViewController *controller, NSError *error) {
+    ...
+}];
+```
 
 ## Handling callbacks
 There are multiple callbacks you can get from `GetIDViewController`.
