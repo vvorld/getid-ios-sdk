@@ -584,7 +584,7 @@ GetIDFactory.makeGetIDViewController(
     url: "API_URL",
     configuration: .defaultConfiguration,
     style: .defaultStyle,
-    metadata: ["dapartment": "EST"],
+    metadata: ["department": "EST"],
     textRecognizer: nil,
     nfcReader: nil
 ) { viewController, error in {
