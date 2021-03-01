@@ -105,9 +105,9 @@ GetIDSDK.startVerificationFlow(
 ### Profile data
 If you have some information about the user before the verification flow started, you can pass it to the SDK as `profileData`. 
 
-The SDK can use this data to prefill the form if the flow contains the `form` step. The user can edit this information while filling out the form.
+The SDK can use this data to prefill the form if the flow contains the `Profile Data` step. The user can edit this information while filling out the form.
 
-If the form does not contain a `profileData` field (or there is no `form` step in the flow) then this field will be sent to the GetID server without the user's edit.
+If the form does not contain a `profileData` field (or there is no `Profile Data` step in the flow) then this field will be sent to the GetID server without the user's edit.
 
 ```swift
 GetIDSDK.startVerificationFlow(
@@ -117,6 +117,8 @@ GetIDSDK.startVerificationFlow(
   profileData: .init(["first-name": "John", "gender": "male"])
 )
 ```
+
+You can find more details on field names and their format in [this document](Docs/ProfileData.md).
 
 ### Metadata
 You can attach some metadata to a verification.
