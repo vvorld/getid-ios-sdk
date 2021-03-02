@@ -41,3 +41,35 @@ See the list of the predefined fields in the table below.
 | `date-of-birth` | `date` | `Date of birth` |
 | `date-of-issue` | `date` | `Date of issue` |
 | `date-of-expiry` | `date` | `Date of expiry` |
+
+### Fields creation
+
+One can create `GetIDProfileData` passing a `[String: String]` dictionary to its initializer. 
+
+If a key matches a `Field type` or a `Category` from the table above and its value is valid then a predefined field will be created. If a key matches a `Field type` or a `Category`, but its value is not valid then this key-value pair will be skipped. 
+
+If a key does not match any `Field type` and `Category` then a "custom" field will be created, with `string` content type. "Custom" fields can not be displayed in the "Profile Data" step of the verification flow so can't be edited by users.
+
+### Example
+
+```swift
+let profileData = GetIDProfileData(
+    ["first-name": "John", // valid, matches to a field type
+     "Last name": "Johnson", // also valid, matches to a category
+     "date-of-birth": "1985-10-21", // valid
+     "document-number": "0000000", // valid
+     "Nationality": "EST", // valid
+     "Country of residence": "Russia", // NOT valid, should be RUS
+     "date-of-expiry": "10.10.2025", // NOT valid, should be 2025-10-10
+     "gender": "male"] // valid
+)
+GetIDSDK.startVerificationFlow(
+  apiUrl: "API_URL",
+  auth: .jwt("JWT"),
+  flowName: "flow-1",
+  profileData: profileData
+)
+```
+If there is no "Profile Data" step in the selected flow (`flow-1`), then the following fields will be sent to the GetID server, without the user's edit: `First name`, `Last name`, `Date of birth`, `Document number`, `Nationality`, `Gender`.
+
+If the flow (`flow-1`) contains "Profile Data" step and `First name` and `Last name` fields are enabled, then these two fields will be prefilled with `"John"` and `"Johnson"` values. The user will be able to edit them. The other four fields won't be displayed to the user but will be sent to the GetID server too.
