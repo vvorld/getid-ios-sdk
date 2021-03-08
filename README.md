@@ -27,7 +27,6 @@
     *   [Verification types](#verification-types)
     *   [Metadata](#metadata)
 *   [Handling callbacks](#handling-callbacks)
-*   [NFC reading](#nfc-reading)
 *   [Form prefill](#form-prefill)
 *   [Localisation](#localisation)
 
@@ -161,7 +160,6 @@ You can customise the SDK flow. Create an instance of the `Configuration` class,
 | `consentInForm` | A flag that determines whether to display the data-processing consent checkbox on the form screen. | `false` |
 | `prefillForm` | A flag that determines whether to prefill form with values extracted from the document. See [paragraph](#form-prefill) below. | `false` |
 | `interactiveDocumentStep` | A flag that determines whether the `.document` step should be "interactive". See [paragraph](#interactive-document-step) below. | `false` |
-| `useNFC` | A flag that determines whether to use NFC for data extraction from the document. See [paragraph](#nfc-reading) below. | `false` |
 | `allowDocumentPhotosFromGallery` | A flag that determines whether to use the photo gallery as a document images' source. | `false` |
 | `acceptableDocuments` | Specifies a list of document types accepted for verification. See [paragraph](#setting-acceptable-documents) below. | `[.defaultCountryKey: DocumentType.allCases]` |
 
@@ -657,37 +655,6 @@ GetIDFactory.makeGetIDViewController(token: "JWT", url: "API_URL") { (viewContro
 | `getIDDidUploadData(_:)` | Tells the delegate that the user data has been uploaded to GetID server. |
 
 Note: some of these callbacks can be called multiple times because a user can press back button, edit the data and go forward again.
-
-## NFC reading
-The SDK is able to read documents using NFC. This feature requires iOS 13+ and works on devices that support NFC reading. 
-To enable this feature, one should set `useNFC` value of `Configuration` object to `true`. And, obviously, `flowItems` should contain `.document` step.
-
-Also, you have to add one more line to your `Cartfile` or `Podfile`:  `github "vvorld/getid-ios-nfc"` or `pod 'GetIDNFC'` respectively. Then you should create an instance of `GetIDNFCDocumentReader` and pass it to `GetIDFactory`.
-
-##### Swift
-```swift
-import GetID
-import GetIDNFC
-...
-let configuration = Configuration()
-configuration.useNFC = true
-configuration.setFlowItems([.document, .form, .selfie])
-...
-GetIDFactory.makeGetIDViewController(
-    token: "JWT",
-    url: "API_URL",
-    configuration: configuration,
-    style: .default,
-    nfcReader: GetIDNFCDocumentReader()) { (viewController, error) in
-    // ...
-}
-...
-extension GetIDNFCDocumentReader: NFCReader {}
-```
-
-Note: access to a document's chip requires a key from its MRZ (machine-readable zone). To increase the chances of successful recognition of the key, one can use `GetIDOCR` framework (see [this section](#form-prefill) for more info).
-
-Note: the SDK displays user a screen for NFC reading only if our server expects that the selected type of a document contains RFID chip. If the SDK does not display this screen for documents you sure contain a chip, please contact us through [support@getid.ee](mailto:support@getid.ee).
 
 ## Form prefill
 
