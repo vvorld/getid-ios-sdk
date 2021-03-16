@@ -526,6 +526,7 @@ You can customize some colors used in the SDK. Create an instance of the `Style`
 | `tickColor` | The color of the tick symbol in checkmark views. |
 | `invalidValueColor` | The color of invalid field values highlighting on the form screen. |
 | `cameraScreenBackgroundColor` | The background color of the camera screen. If `nil` then `.backgroundColor` is used. |
+| `cameraButtonColor` | The color of the camera button. If `nil` then `.white` is used. |
 | `poweredByStyle` | The style of GetID logo in `Powered by GetID` label. Possible values: `.light`, `.dark`. |
 | `successIconStyle` | The style of the icon used to display a successful result. |
 | `errorIconStyle` | The style of the icon used in error message alerts. |
