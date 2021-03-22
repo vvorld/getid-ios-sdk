@@ -1,3 +1,0 @@
-
-// All displayed strings in GetID iOS SDK are localized. But the app should contain its own Localizable.strings file otherwise localization won't work.
-"key" = "Value";

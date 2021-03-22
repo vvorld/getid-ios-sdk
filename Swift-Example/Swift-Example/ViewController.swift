@@ -6,28 +6,33 @@
 //  Copyright © 2019 GetID. All rights reserved.
 //
 
-import UIKit
 import GetID
+import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("Verify me", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(verifyMe), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
-        
-        let configuration = Configuration()
-        configuration.setFlowItems([.consent, .form, .document, .selfie, .thanks])
-        configuration.setFormFields([.firstName, .lastName, .dateOfBirth])
-        
-        let apiKey = "SDK_KEY"
-        let url = "API_URL"
-        GetIDFactory.makeGetIDViewController(apiKey: apiKey, url: url, configuration: configuration) { [weak self] (vc, error) in
-            guard let viewController = vc else {
-                print(error ?? "(nil)")
-                return
-            }
-            self?.present(viewController, animated: true, completion: nil)
-        }
+        view.backgroundColor = .white
+
+        view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
+    @objc private func verifyMe(_: UIButton) {
+        GetIDSDK.startVerificationFlow(
+            apiUrl: "API_URL",
+            auth: .sdkKey("SDK_KEY"),
+            flowName: "getid-doc-selfie-liveness"
+        )
+    }
 }
