@@ -1,6 +1,6 @@
 # Field categories
 
-All the text data about the user represented as FormField objects. See [this section](../README.md#form-screen-setup) of the main  Readme file. To standardize the fields' names, we assign them "categories" based on their titles. 
+All the text data about the user represented as FormField objects. See [this section](README-v1.md#form-screen-setup) of the main Readme file. To standardize the fields' names, we assign them "categories" based on their titles. 
 
 | Category | Titles |
 | ----- | ----- |
