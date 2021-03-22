@@ -7,31 +7,28 @@
 //
 
 #import "ViewController.h"
-@import GetID;
-
-@interface ViewController () <GetIDCompletionDelegate>
-
-@end
+#import "ObjC-Example-Swift.h"
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor whiteColor];
 
-    NSString *apiKey = @"SDK_KEY";
-    NSString *url = @"API_URL";
-    [GIDFactory makeGetIDViewControllerWithApiKey:apiKey url:url then:^(GetIDViewController *viewController, NSError *error) {
-        if (viewController == nil) {
-            return;
-        }
-        viewController.delegate = self;
-        [self presentViewController:viewController animated:YES completion:nil];
-    }];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"Verify me" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(verifyMe:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.view addSubview:button];
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    [[button.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor] setActive:YES];
+    [[button.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor] setActive:YES];
 }
 
-- (void)getIDDidComplete:(GetIDViewController * _Nonnull)viewController applicationID:(NSString * _Nonnull)applicationID {}
-- (void)getIDDidCancel:(GetIDViewController * _Nonnull)viewController {}
-- (void)getIDDidFail:(GetIDViewController * _Nonnull)viewController error:(NSError * _Nonnull)error {}
+- (void)verifyMe:(UIButton *)sender {
+    GetIDSwiftWrapper *wrapper = [GetIDSwiftWrapper new];
+    [wrapper startVerificationFlow];
+}
 @end
