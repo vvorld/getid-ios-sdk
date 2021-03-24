@@ -44,7 +44,7 @@ Note: In your GetID Dashboard, you can get and set `API KEY` and `SDK KEY`. `API
 The SDK uses the camera for capturing photos during verification. The app is responsible for describing the reason for using the camera. You must add `NSCameraUsageDescription` to the Info.plist of the app.
 
 ### Using in Objective-C apps
-If you app is written entirely in Objective-C, you should set `Always Embed Swift Standard Libraries` to `YES` in your app target's build settings.
+If you app is written entirely in Objective-C, you should set `Always Embed Swift Standard Libraries` to `YES` in your app target's build settings. You can find more details on integration into an Objective-C app in [this document](Docs/Objective-C.md).
 
 ## Installation
 
