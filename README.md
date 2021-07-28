@@ -144,6 +144,8 @@ GetIDSDK.startVerificationFlow(
 )
 ```
 
+If you want to use a custom dictionary then pass the `dictionary` parameter as well. See our [API documentation])(https://vvorld.github.io/#/paths/~1api~1v1~1translations/post) to see how to upload custom translations.
+
 ### Handling callbacks
 If you want to handle the verification process completion then assign an object that conforms to `GetIDSDKDelegate` protocol to `delegate` property of `GetIDSDK`. 
 
