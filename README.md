@@ -16,6 +16,7 @@
     *   [Profile data](#profile-data)
     *   [Metadata](#metadata)
     *   [Locale](#locale)
+    *   [Custom dictionary](#custom-dictionary)
     *   [Handling callbacks](#handling-callbacks)
     *   [Possible errors](#possible-errors)
 *   [Localisation](#localisation)
@@ -145,7 +146,7 @@ GetIDSDK.startVerificationFlow(
 ```
 
 ### Custom dictionary
-If you want to change some texts in the UI, then you have to upload one or more dictionaries to our backend. Our API documentation describes how to do that [on this page)(https://developers.getid.ee/docs/post-create-dictionary). Once a dictionary is uploaded, pass its name as the `dictionary` parameter to the SDK initializer.
+If you want to change some texts in the UI, then you have to upload one or more dictionaries to our backend. Our API documentation describes how to do that [on this page](https://developers.getid.ee/docs/post-create-dictionary). Once a dictionary is uploaded, pass its name as the `dictionary` parameter to the SDK initializer.
 ```swift
 GetIDSDK.startVerificationFlow(
   apiUrl: "API_URL",
