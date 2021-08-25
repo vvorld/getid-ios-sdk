@@ -144,7 +144,16 @@ GetIDSDK.startVerificationFlow(
 )
 ```
 
-If you want to use a custom dictionary then pass the `dictionary` parameter as well. See our [API documentation])(https://vvorld.github.io/#/paths/~1api~1v1~1translations/post) to see how to upload custom translations.
+### Custom dictionary
+If you want to change some texts in the UI, then you have to upload one or more dictionaries to our backend. Our API documentation describes how to do that [on this page)(https://developers.getid.ee/docs/post-create-dictionary). Once a dictionary is uploaded, pass its name as the `dictionary` parameter to the SDK initializer.
+```swift
+GetIDSDK.startVerificationFlow(
+  apiUrl: "API_URL",
+  auth: .jwt("JWT"),
+  flowName: "FLOW_NAME",
+  dictionary: "custom-dictionary-name"
+)
+```
 
 ### Handling callbacks
 If you want to handle the verification process completion then assign an object that conforms to `GetIDSDKDelegate` protocol to `delegate` property of `GetIDSDK`. 
