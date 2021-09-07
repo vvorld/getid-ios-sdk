@@ -14,6 +14,7 @@
 *   [Usage](#usage)
     *   [Starting the flow](#starting-the-flow)
     *   [Profile data](#profile-data)
+    *   [Acceptable documents](#acceptable-documents)
     *   [Metadata](#metadata)
     *   [Locale](#locale)
     *   [Custom dictionary](#custom-dictionary)
@@ -120,6 +121,19 @@ GetIDSDK.startVerificationFlow(
 ```
 
 You can find more details on field names and their format in [this document](Docs/ProfileData.md).
+
+### Acceptable documents
+It's possible to limit the list of acceptable documents and issuing countries.
+In order to do that pass `acceptableDocuments` parameter to `GetIDSDK.startVerificationFlow` method.
+```swift
+GetIDSDK.startVerificationFlow(
+  apiUrl: "API_URL",
+  auth: .jwt("JWT"),
+  flowName: "FLOW_NAME",
+  acceptableDocuments: .init(["EST": [.passport, .idCard], .default: [.passport]])
+)
+```
+See more details on setting acceptable document types and countries in [this document](Docs/AcceptableDocuments.md).
 
 ### Metadata
 You can attach some metadata to a verification.
