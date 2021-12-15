@@ -54,18 +54,18 @@ If you app is written entirely in Objective-C, you should set `Always Embed Swif
 GetID SDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your `Podfile`:
 ```ruby
-pod 'GetID', '~> 2.0'
+pod 'GetID', '~> 2.6'
 ```
 
 ### Carthage
 GetID SDK is compatible with [Carthage](https://github.com/Carthage/Carthage). Add it to your `Cartfile`:
 ```ogdl
-github "vvorld/getid-ios-sdk" ~> 2.0
+github "vvorld/getid-ios-sdk" ~> 2.6
 ```
 
 ### Swift Package Manager
 In Xcode (11.2+), select File > Swift Packages > Add Package Dependency.
-Follow the prompts using the URL for this repository and a minimum semantic version of `2.0.0`.
+Follow the prompts using the URL for this repository and a minimum semantic version of `2.6.0`.
 
 ## Usage
 Before you start please go to GetID Admin Panel and create a flow (Flows > Add new flow).
