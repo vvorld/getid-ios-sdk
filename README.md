@@ -13,6 +13,7 @@
     *   [Swift Package Manager](#swift-package-manager)
 *   [Usage](#usage)
     *   [Starting the flow](#starting-the-flow)
+    *   [External IDs](#external-ids)
     *   [Profile data](#profile-data)
     *   [Acceptable documents](#acceptable-documents)
     *   [Metadata](#metadata)
@@ -103,6 +104,9 @@ GetIDSDK.startVerificationFlow(
   flowName: "FLOW_NAME"
 )
 ```
+
+### External IDs
+There are two different external IDs that can be used to link a verification with a user in your system: `customerId` and `externalId`. See the details in [this document](Docs/ExternalIDs.md).
 
 ### Profile data
 If you have some information about the user before the verification flow started, you can pass it to the SDK as `profileData`. 
