@@ -5,6 +5,6 @@ target 'ObjC-Example' do
   use_frameworks!
 
   # Pods for ObjC-Example
-  pod 'GetID', '2.6.0'
+  pod 'GetID', '2.7.0'
 
 end

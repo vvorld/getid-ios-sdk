@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "GetID",
-        "repositoryURL": "https://github.com/vvorld/getid-ios-sdk",
-        "state": {
-          "branch": null,
-          "revision": "1eefab202f8cdfd94e67ba99bf3465ecebe80313",
-          "version": "2.6.0"
-        }
+  "pins" : [
+    {
+      "identity" : "getid-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vvorld/getid-ios-sdk",
+      "state" : {
+        "revision" : "abb990448488901b5f91a270dd5a71f7b2bc0c7a",
+        "version" : "2.7.0"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }
