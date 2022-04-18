@@ -257,6 +257,7 @@ The list of supported languages:
 - Italian (`it`)
 - Polish (`pl`)
 - Dutch (`nl`)
+- Swedish (`sv`)
 - Danish (`da`)
 - Greek (`el`)
 - Czech (`cs`)
