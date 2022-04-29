@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vvorld/getid-ios-sdk",
       "state" : {
-        "revision" : "0ed6776324f6a49a36444cfdb82a69285b796155",
-        "version" : "2.7.1"
+        "revision" : "6c926ddfaa8d91d2806ade3e68f7794e0436a1a2",
+        "version" : "2.8.0"
       }
     }
   ],
