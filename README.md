@@ -256,6 +256,7 @@ The list of supported languages:
 - Brazilian Portuguese (`pt_BR`)
 - Italian (`it`)
 - Polish (`pl`)
+- Ukrainian (`uk`)
 - Dutch (`nl`)
 - Swedish (`sv`)
 - Danish (`da`)
