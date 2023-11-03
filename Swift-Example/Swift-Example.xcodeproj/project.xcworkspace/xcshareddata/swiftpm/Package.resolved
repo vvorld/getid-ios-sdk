@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "getid-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vvorld/getid-ios-sdk",
+      "state" : {
+        "revision" : "d240f3bb8918618db6fa609e8f2286a74ce29c67",
+        "version" : "2.9.0"
+      }
+    }
+  ],
+  "version" : 2
+}

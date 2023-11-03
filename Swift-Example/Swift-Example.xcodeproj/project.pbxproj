@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		740B88D427E8C50900B54394 /* GetID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740B88D327E8C50900B54394 /* GetID.xcframework */; };
-		740B88D527E8C50900B54394 /* GetID.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 740B88D327E8C50900B54394 /* GetID.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		61EA5BE42AF3701400ADB1B9 /* GetID in Frameworks */ = {isa = PBXBuildFile; productRef = 61EA5BE32AF3701400ADB1B9 /* GetID */; };
 		875530522395426100B3DA61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875530512395426100B3DA61 /* AppDelegate.swift */; };
 		875530562395426100B3DA61 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875530552395426100B3DA61 /* ViewController.swift */; };
 		8755305B2395426500B3DA61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8755305A2395426500B3DA61 /* Assets.xcassets */; };
@@ -22,7 +21,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				740B88D527E8C50900B54394 /* GetID.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -30,13 +28,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		740B88D327E8C50900B54394 /* GetID.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GetID.xcframework; path = Carthage/Build/GetID.xcframework; sourceTree = "<group>"; };
 		8755304E2395426100B3DA61 /* Swift-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		875530512395426100B3DA61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		875530552395426100B3DA61 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8755305A2395426500B3DA61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8755305F2395426500B3DA61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		875530662395448D00B3DA61 /* GetID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetID.framework; path = Carthage/Build/iOS/GetID.framework; sourceTree = "<group>"; };
 		8789CE78239548BE0023FF7B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -45,7 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				740B88D427E8C50900B54394 /* GetID.xcframework in Frameworks */,
+				61EA5BE42AF3701400ADB1B9 /* GetID in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,8 +80,6 @@
 		875530652395448D00B3DA61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				740B88D327E8C50900B54394 /* GetID.xcframework */,
-				875530662395448D00B3DA61 /* GetID.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -107,6 +101,9 @@
 			dependencies = (
 			);
 			name = "Swift-Example";
+			packageProductDependencies = (
+				61EA5BE32AF3701400ADB1B9 /* GetID */,
+			);
 			productName = "Swift-Example";
 			productReference = 8755304E2395426100B3DA61 /* Swift-Example.app */;
 			productType = "com.apple.product-type.application";
@@ -136,6 +133,9 @@
 				ru,
 			);
 			mainGroup = 875530452395426100B3DA61;
+			packageReferences = (
+				61EA5BE22AF3701400ADB1B9 /* XCRemoteSwiftPackageReference "getid-ios-sdk" */,
+			);
 			productRefGroup = 8755304F2395426100B3DA61 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -291,7 +291,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X7XGD8K7A6;
+				DEVELOPMENT_TEAM = 3P43BMQQD2;
 				INFOPLIST_FILE = "Swift-Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,7 +310,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X7XGD8K7A6;
+				DEVELOPMENT_TEAM = 3P43BMQQD2;
 				INFOPLIST_FILE = "Swift-Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -346,6 +346,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		61EA5BE22AF3701400ADB1B9 /* XCRemoteSwiftPackageReference "getid-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vvorld/getid-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		61EA5BE32AF3701400ADB1B9 /* GetID */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61EA5BE22AF3701400ADB1B9 /* XCRemoteSwiftPackageReference "getid-ios-sdk" */;
+			productName = GetID;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 875530462395426100B3DA61 /* Project object */;
 }
