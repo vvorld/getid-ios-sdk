@@ -24,30 +24,38 @@
 *   [Localisation](#localisation)
 
 ## Overview
-The SDK provides a set of screens for capturing identity documents, face photos, profile data, and for performing the liveness check. After capturing the data the SDK uploads it to the GetID server.
+The GetID SDK offers a comprehensive toolkit for capturing identity documents, facial photos, profile information, and performing liveness checks. Once captured, the data is sent to the GetID server.
 
-The SDK does not provide methods for obtaining verification results. Use GetID API on your backend to get ones.
+> **Note**: The SDK does not support methods for fetching verification results. Use the GetID API on your server for this purpose.
 
-This document describes how to use the version `2.0.0` or newer. The documentation for older versions is [here](Docs/v1/README-v1.md).
+For instructions on how to use version `2.0.0` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
 
 ## Getting started
 ### Requirements
-- Xcode 10.2+
+- Xcode 14.1+
 - Swift 5.0+
-- iOS 11+
+- iOS 12+
 
 ### Obtaining an SDK key
-In order to start using GetID SDK, you will need an `SDK KEY` and `API URL`.
-Both can be found and modified either through your GetID Dashboard or via contacting our 
-[integration support](mailto:support@getid.ee?subject=[GitHub]%20Obtaining%20GetID%20credentials).
+Start by fetching the `SDK KEY` and `API URL`:
+
+- Access these from your GetID Dashboard.
+- Alternatively, contact our [integration support](mailto:support@getid.ee?subject=[GitHub]%20Obtaining%20GetID%20credentials).
+
+> **Security Reminder**: Your GetID Dashboard provides both `API KEY` and `SDK KEY`. While the `API KEY` allows for public and SDK API calls, the `SDK KEY` is exclusive to SDK API calls. It's safer to use `SDK KEY` in your SDK.
 
 Note: In your GetID Dashboard, you can get and set `API KEY` and `SDK KEY`. `API KEY` grants you access to public API calls and SDK API calls. `SDK KEY` grants you access to SDK API calls only. For security reasons, strongly recommended using the `SDK KEY` in your SDK.
 
-### Camera usage description
-The SDK uses the camera for capturing photos during verification. The app is responsible for describing the reason for using the camera. You must add `NSCameraUsageDescription` to the Info.plist of the app.
+### Camera Permissions
+Ensure the SDK can access the device camera:
 
-### Using in Objective-C apps
-If you app is written entirely in Objective-C, you should set `Always Embed Swift Standard Libraries` to `YES` in your app target's build settings. You can find more details on integration into an Objective-C app in [this document](Docs/Objective-C.md).
+- Add the `NSCameraUsageDescription` to the app's Info.plist to explain why you need camera access.
+
+### Integration with Objective-C Apps
+For apps written in Objective-C:
+
+- Set `Always Embed Swift Standard Libraries` to `YES` in your app's build settings.
+- Detailed integration instructions are available in [this document](Docs/Objective-C.md).
 
 ## Installation
 
@@ -65,8 +73,7 @@ github "vvorld/getid-ios-sdk" ~> 2.9
 ```
 
 ### Swift Package Manager
-In Xcode (11.2+), select File > Swift Packages > Add Package Dependency.
-Follow the prompts using the URL for this repository and a minimum semantic version of `2.9.0`.
+Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `2.9.0` or above.
 
 ## Usage
 Before you start please go to GetID Admin Panel and create a flow (Flows > Add new flow).
