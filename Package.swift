@@ -12,8 +12,8 @@ let package = Package(
       targets: ["GetID"])
   ],
   dependencies: [
-    .package(url: "https://github.com/airbnb/lottie-spm", .upToNextMajor(from: "4.3.3")),
-    .package(
+    .package(name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", .upToNextMajor(from: "4.3.3")),
+    .package(name: "RecaptchaEnterprise",
       url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk",
       .upToNextMajor(from: "18.3.0")),
   ],
