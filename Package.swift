@@ -13,12 +13,12 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", .upToNextMajor(from: "4.3.3")
+      name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", .upToNextMajor(from: "4.4.2")
     ),
     .package(
       name: "RecaptchaEnterprise",
       url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk",
-      .upToNextMajor(from: "18.3.0")),
+      .upToNextMajor(from: "18.6.0")),
   ],
   targets: [
     .binaryTarget(
