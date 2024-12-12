@@ -24,6 +24,7 @@ let package = Package(
       checksum: "fd925b62d7c74084999495783b1e11880b2cf4f74f0737058cf19382fb406311"),
     .target(
       name: "_GetIDStub",
-      dependencies: ["GetID", "RecaptchaEnterprise"]),
+      dependencies: ["GetID", "RecaptchaEnterprise"],
+      resources: [.copy("Resources/PrivacyInfo.xcprivacy")]),
   ]
 )
