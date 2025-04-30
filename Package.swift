@@ -24,7 +24,7 @@ let package = Package(
     .binaryTarget(
       name: "GetID",
       url: "https://github.com/vvorld/getid-ios-sdk/releases/download/3.2.12/GetID.xcframework.zip",
-      checksum: "7125d6327d9c4c9c839d51a1ff5925fa26e639982d464f5c2d9a7dc6bf668588"),
+      checksum: "36e4b47aecd8abf5e8ab5d61954cb8feedf2b425430bb2b388d3808fed926b61"),
     .target(
       name: "_GetIDStub",
       dependencies: ["GetID", "Lottie", "RecaptchaEnterprise"],
