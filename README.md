@@ -73,7 +73,7 @@ github "vvorld/getid-ios-sdk" ~> 3.2.11
 ```
 
 ### Swift Package Manager
-Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `2.9.0` or above.
+Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `3.2.11` or above.
 
 ## Usage
 Before you start please go to GetID Admin Panel and create a flow (Flows > Add new flow).
