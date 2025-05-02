@@ -28,7 +28,7 @@ The GetID SDK offers a comprehensive toolkit for capturing identity documents, f
 
 > **Note**: The SDK does not support methods for fetching verification results. Use the GetID API on your server for this purpose.
 
-For instructions on how to use version `2.0.0` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
+For instructions on how to use version `3.2.11` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
 
 ## Getting started
 ### Requirements
@@ -63,13 +63,13 @@ For apps written in Objective-C:
 GetID SDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your `Podfile`:
 ```ruby
-pod 'GetID', '~> 2.9'
+pod 'GetID', '~> 3.2.11'
 ```
 
 ### Carthage
 GetID SDK is compatible with [Carthage](https://github.com/Carthage/Carthage). Add it to your `Cartfile`:
 ```ogdl
-github "vvorld/getid-ios-sdk" ~> 2.9
+github "vvorld/getid-ios-sdk" ~> 3.2.11
 ```
 
 ### Swift Package Manager
