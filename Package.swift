@@ -13,12 +13,12 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      name: "Lottie", url: "https://github.com/airbnb/lottie-ios.git", .upToNextMajor(from: "4.4.2")
+      name: "Lottie", url: "https://github.com/airbnb/lottie-ios.git", .upToNextMajor(from: "4.5.1")
     ),
     .package(
       name: "RecaptchaEnterprise",
       url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk",
-      .upToNextMajor(from: "18.6.0")),
+      .upToNextMinor(from: "18.6.0")),
   ],
   targets: [
     .binaryTarget(
@@ -28,6 +28,6 @@ let package = Package(
     .target(
       name: "_GetIDStub",
       dependencies: ["GetID", "Lottie", "RecaptchaEnterprise"],
-      resources: [.copy("Resources/PrivacyInfo.xcprivacy")]),
+      resources: [.copy("./Sources/GetID/PrivacyInfo.xcprivacy")]),
   ]
 )
