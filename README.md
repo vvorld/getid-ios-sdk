@@ -28,13 +28,13 @@ The GetID SDK offers a comprehensive toolkit for capturing identity documents, f
 
 > **Note**: The SDK does not support methods for fetching verification results. Use the GetID API on your server for this purpose.
 
-For instructions on how to use version `3.2.17` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
+For instructions on how to use version `3.2.18` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
 
 ## Getting started
 ### Requirements
-- Xcode 14.1+
-- Swift 5.0+
-- iOS 12+
+- Xcode 16.3+
+- Swift 5.5+
+- iOS 15.1+
 
 ### Obtaining an SDK key
 Start by fetching the `SDK KEY` and `API URL`:
@@ -60,20 +60,25 @@ For apps written in Objective-C:
 ## Installation
 
 ### Cocoapods
-GetID SDK is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your `Podfile`:
+To install the GetID iOS SDK, you need to add the following CDN link to your `Podfile` and then do a pod install.
+Please note, the version number of the SDK needs to be specified in the path.
 ```ruby
-pod 'GetID', '~> 3.2.17'
+pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios/3.2.18/GetID.podspec'
 ```
+
+> ⚠️ **Warning: Build issue**  
+> You might encounter some building issue. For that, just disable **User Script Sandboxing** in your build settings.
+>
+> ![Disable User Script Sandboxing in Xcode Build Settings](resources/userScriptSandboxing.png)
 
 ### Carthage
 GetID SDK is compatible with [Carthage](https://github.com/Carthage/Carthage). Add it to your `Cartfile`:
 ```ogdl
-github "vvorld/getid-ios-sdk" ~> 3.2.17
+github "vvorld/getid-ios-sdk" ~> 3.2.18
 ```
 
 ### Swift Package Manager
-Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `3.2.17` or above.
+Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `3.2.18` or above.
 
 ## Usage
 Before you start please go to GetID Admin Panel and create a flow (Flows > Add new flow).
