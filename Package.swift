@@ -13,6 +13,9 @@ let package = Package(
   ],
   dependencies: [
     .package(
+      name: "Lottie", url: "https://github.com/airbnb/lottie-ios.git", .upToNextMajor(from: "4.5.2")
+    ),
+    .package(
       name: "RecaptchaEnterprise",
       url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk",
       .upToNextMajor(from: "18.7.0")),
@@ -24,7 +27,7 @@ let package = Package(
       checksum: "1593ee31b729380d57839aee3a6e7dbcf687969e7ce21635a06a83fbc5861418"),
     .target(
       name: "_GetIDStub",
-      dependencies: ["GetID", "RecaptchaEnterprise"],
-      resources: [.copy("./Sources/GetID/PrivacyInfo.xcprivacy")]),
+      dependencies: ["GetID", "Lottie", "RecaptchaEnterprise"],
+      resources: [.copy("./PrivacyInfo.xcprivacy")]),
   ]
 )
