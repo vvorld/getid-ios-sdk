@@ -13,7 +13,9 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      name: "Lottie", url: "https://github.com/airbnb/lottie-ios.git", .upToNextMajor(from: "4.5.2")
+      name: "Lottie",
+      url: "https://github.com/airbnb/lottie-spm.git",
+      .upToNextMajor(from: "4.5.2")
     ),
     .package(
       name: "RecaptchaEnterprise",
