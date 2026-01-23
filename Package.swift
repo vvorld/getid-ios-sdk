@@ -16,11 +16,6 @@ let package = Package(
         name: "RecaptchaEnterprise",
         url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk",
         .upToNextMajor(from: "18.7.0")),
-    .package(
-        name: "SVGKit",
-        url: "https://github.com/SVGKit/SVGKit.git",
-        .upToNextMajor(from: "3.0.0")
-    ),
   ],
   targets: [
     .binaryTarget(
@@ -29,6 +24,6 @@ let package = Package(
       checksum: "958adf8a3224d89e18c24025a7959ebb0dcf3b1e974069a342ab14cc15fb5f1e"),
     .target(
       name: "_GetIDStub",
-      dependencies: ["GetID", "SVGKit", "RecaptchaEnterprise"]),
+      dependencies: ["GetID", "RecaptchaEnterprise"]),
   ]
 )
