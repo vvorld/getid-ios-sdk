@@ -1,10 +1,10 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
   name: "GetID",
   platforms: [
-    .iOS(.v15)
+    .iOS(.v16)
   ],
   products: [
     .library(
@@ -13,9 +13,14 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      name: "RecaptchaEnterprise",
-      url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk",
-      .upToNextMajor(from: "18.7.0")),
+        name: "RecaptchaEnterprise",
+        url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk",
+        .upToNextMajor(from: "18.7.0")),
+    .package(
+        name: "SVGKit",
+        url: "https://github.com/SVGKit/SVGKit.git",
+        .upToNextMajor(from: "3.0.0")
+    ),
   ],
   targets: [
     .binaryTarget(
@@ -24,6 +29,6 @@ let package = Package(
       checksum: "3aaa54e6dd63e98c781fadda1e63a0a35286feca19e84d766781544c6d898921"),
     .target(
       name: "_GetIDStub",
-      dependencies: ["GetID", "RecaptchaEnterprise"]),
+      dependencies: ["GetID", "SVGKit", "RecaptchaEnterprise"]),
   ]
 )
