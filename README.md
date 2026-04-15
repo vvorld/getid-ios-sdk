@@ -28,13 +28,15 @@ The GetID SDK offers a comprehensive toolkit for capturing identity documents, f
 
 > **Note**: The SDK does not support methods for fetching verification results. Use the GetID API on your server for this purpose.
 
-For instructions on how to use version `3.2.18` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
+For instructions on how to use version `4.1.0` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
 
 ## Getting started
 ### Requirements
 - Xcode 16.3+
-- Swift 5.5+
-- iOS 15.1+
+- Swift 5.7+
+- iOS 16.0+
+
+ **This version is built using Xcode 26.**  
 
 ### Obtaining an SDK key
 Start by fetching the `SDK KEY` and `API URL`:
@@ -63,7 +65,7 @@ For apps written in Objective-C:
 To install the GetID iOS SDK, you need to add the following CDN link to your `Podfile` and then do a pod install.
 Please note, the version number of the SDK needs to be specified in the path.
 ```ruby
-pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios/3.2.18/GetID.podspec'
+pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios/4.1.0/GetID.podspec'
 ```
 
 > ⚠️ **Warning: Build issue**  
@@ -71,14 +73,22 @@ pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios/3.2.18/GetID.podspec'
 >
 > ![Disable User Script Sandboxing in Xcode Build Settings](resources/userScriptSandboxing.png)
 
+> ⚠️ **iOS 26 Liquid Glass Compatibilty**  
+> Please add the following to your Info.plist file to disable Liquid Glass, as it is not supported yet by the `GetID SDK`
+```xml
+  <key>UIDesignRequiresCompatibility</key>
+  <true/>
+```
+
+
 ### Carthage
 GetID SDK is compatible with [Carthage](https://github.com/Carthage/Carthage). Add it to your `Cartfile`:
 ```ogdl
-github "vvorld/getid-ios-sdk" ~> 3.2.18
+github "vvorld/getid-ios-sdk" ~> 4.1.0
 ```
 
 ### Swift Package Manager
-Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `3.2.18` or above.
+Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `4.1.0` or above.
 
 ## Usage
 Before you start please go to GetID Admin Panel and create a flow (Flows > Add new flow).
