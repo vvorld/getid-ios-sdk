@@ -28,7 +28,7 @@ The GetID SDK offers a comprehensive toolkit for capturing identity documents, f
 
 > **Note**: The SDK does not support methods for fetching verification results. Use the GetID API on your server for this purpose.
 
-For instructions on how to use version `4.1.0` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
+For instructions on how to use version `4.1.1` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
 
 ## Getting started
 ### Requirements
@@ -53,6 +53,26 @@ Ensure the SDK can access the device camera:
 
 - Add the `NSCameraUsageDescription` to the app's Info.plist to explain why you need camera access.
 
+### NFC Permissions
+If your flow includes NFC-based document reading, you must configure NFC support in your project:
+
+1. **Enable the NFC Capability**: In Xcode, go to your target's `Signing & Capabilities` tab and add the `Near Field Communication Tag Reading` capability.
+
+2. **Add NFC Usage Description**: Add the `NFCReaderUsageDescription` key to your app's `Info.plist` to explain why your app requires NFC access.
+```xml
+<key>NFCReaderUsageDescription</key>
+<string>This app uses NFC to read your identity document.</string>
+```
+
+3. **Add ISO 7816 application identifiers**: Add the `com.apple.developer.nfc.readersession.iso7816.select-identifiers` key to your `Info.plist` with the required identifiers for reading identity documents:
+```xml
+<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+<array>
+  <string>A0000002471001</string>
+  <string>A0000002472001</string>
+</array>
+```
+
 ### Integration with Objective-C Apps
 For apps written in Objective-C:
 
@@ -65,7 +85,7 @@ For apps written in Objective-C:
 To install the GetID iOS SDK, you need to add the following CDN link to your `Podfile` and then do a pod install.
 Please note, the version number of the SDK needs to be specified in the path.
 ```ruby
-pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios/4.1.0/GetID.podspec'
+pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios/4.1.1/GetID.podspec'
 ```
 
 > ⚠️ **Warning: Build issue**  
@@ -84,11 +104,11 @@ pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios/4.1.0/GetID.podspec'
 ### Carthage
 GetID SDK is compatible with [Carthage](https://github.com/Carthage/Carthage). Add it to your `Cartfile`:
 ```ogdl
-github "vvorld/getid-ios-sdk" ~> 4.1.0
+github "vvorld/getid-ios-sdk" ~> 4.1.1
 ```
 
 ### Swift Package Manager
-Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `4.1.0` or above.
+Go to `File > Swift Packages > Add Package Dependency`. Use this repository's URL with a version of `4.1.1` or above.
 
 ## Usage
 Before you start please go to GetID Admin Panel and create a flow (Flows > Add new flow).
