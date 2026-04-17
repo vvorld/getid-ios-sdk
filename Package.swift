@@ -13,7 +13,6 @@ let package = Package(
   ],
   dependencies: [
     .package(
-        name: "RecaptchaEnterprise",
         url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk",
         .upToNextMajor(from: "18.7.0")),
     .package(
