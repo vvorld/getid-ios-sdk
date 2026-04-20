@@ -26,6 +26,6 @@ let package = Package(
       checksum: "df5a1a1297dfe4af2f872922b626f26f5c6da62723021043540c0c109101408b"),
     .target(
       name: "_GetIDStub",
-      dependencies: ["GetID", "RecaptchaEnterprise", "SwiftDraw"]),
+      dependencies: ["GetID", .product(name: "RecaptchaEnterprise", package: "recaptcha-enterprise-mobile-sdk"), "SwiftDraw"]),
   ]
 )
