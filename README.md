@@ -85,7 +85,7 @@ For apps written in Objective-C:
 To install the GetID iOS SDK, you need to add the following CDN link to your `Podfile` and then do a pod install.
 Please note, the version number of the SDK needs to be specified in the path.
 ```ruby
-pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios//GetID.podspec'
+pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios/4.1.3/GetID.podspec'
 ```
 
 > ⚠️ **Warning: Build issue**  
@@ -104,7 +104,7 @@ pod 'GetID', podspec: 'https://cdn.getid.cloud/sdk/ios//GetID.podspec'
 ### Carthage
 GetID SDK is compatible with [Carthage](https://github.com/Carthage/Carthage). Add it to your `Cartfile`:
 ```ogdl
-github "vvorld/getid-ios-sdk" ~> 
+github "vvorld/getid-ios-sdk" ~> 4.1.3
 ```
 
 ### Swift Package Manager
