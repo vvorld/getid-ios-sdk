@@ -28,7 +28,7 @@ The GetID SDK offers a comprehensive toolkit for capturing identity documents, f
 
 > **Note**: The SDK does not support methods for fetching verification results. Use the GetID API on your server for this purpose.
 
-For instructions on how to use version `4.1.1` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
+For instructions on how to use version `4.1.3` or newer, proceed below. For older versions, see [here](Docs/v1/README-v1.md).
 
 ## Getting started
 ### Requirements
